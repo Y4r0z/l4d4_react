@@ -1,0 +1,17 @@
+.card-main:hover .card-image{
+    filter:brightness(100%) blur(1px) sepia(10%);
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+    transition-property: filter;
+    -webkit-transition-property: filter;
+}
+
+.card-image{
+    filter:brightness(85%) blur(0) sepia(0%);
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+    max-width: 800px;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+    transition-property: filter;
+    -webkit-transition-property: filter;
+}
