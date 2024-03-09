@@ -1,17 +1,30 @@
+.card-main{
+    background-color: #0f0f0f;
+    -webkit-transition-duration: 400ms;
+    transition-duration: 400ms;
+}
+.card-main:hover
+{
+    background-color: #0a0a0a;
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+}
+
+.card-image{
+    filter:brightness(100%) blur(0);
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+    max-width: 600px;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+    transition-property: filter, max-width;
+    -webkit-transition-property: filter;
+}
+
 .card-main:hover .card-image{
-    filter:brightness(100%) blur(1px) sepia(10%);
+    filter:brightness(85%) blur(2px);
     -webkit-transition-duration: 200ms;
     transition-duration: 200ms;
     transition-property: filter;
     -webkit-transition-property: filter;
-}
-
-.card-image{
-    filter:brightness(85%) blur(0) sepia(0%);
-    -webkit-transition-duration: 300ms;
-    transition-duration: 300ms;
-    max-width: 800px;
-    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
-    transition-property: filter;
-    -webkit-transition-property: filter;
+    mask-image: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0));
 }

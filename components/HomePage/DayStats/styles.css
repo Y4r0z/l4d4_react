@@ -1,0 +1,75 @@
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 4px;
+    margin-right: 4px;
+    box-shadow: 0px 0px 1px 1px #0000001a;
+    display: inline-block;
+  }
+  
+  .pulse {
+    animation: pulse-animation 8s infinite;
+  }
+  .pulse-red{
+    background-color: #dc2626;
+    animation: pulse-animation-red 8s infinite;
+  }
+  .pulse-black{
+    background-color: #475569;
+    animation: pulse-animation-black 8s infinite;
+    animation-delay: 2s;
+  }
+  .pulse-blue{
+    background-color: #2563eb;
+    animation: pulse-animation-blue 8s infinite;
+    animation-delay: 4s;
+  }
+  .pulse-green{
+    background-color: #16a34a;
+    animation: pulse-animation-green 8s infinite;
+    animation-delay: 6s;
+  }
+
+  
+  @keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+    25% {
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    }
+  }
+  @keyframes pulse-animation-red {
+    0% {
+      box-shadow: 0 0 0 0px #dc2626F0;
+    }
+    25% {
+      box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+    }
+  }
+  @keyframes pulse-animation-black {
+    0% {
+      box-shadow: 0 0 0 0px #475569F0;
+    }
+    25% {
+      box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+    }
+  }
+  @keyframes pulse-animation-green {
+    0% {
+      box-shadow: 0 0 0 0px #16a34aF0;
+    }
+    25% {
+      box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+    }
+  }
+  @keyframes pulse-animation-blue {
+    0% {
+      box-shadow: 0 0 0 0px #2563ebF0;
+    }
+    25% {
+      box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+    }
+  }

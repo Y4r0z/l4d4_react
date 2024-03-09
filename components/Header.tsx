@@ -10,29 +10,51 @@ import {
     NavbarMenuItem
   } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-export function NavLink({href, text} : {href: string, text: string})
+export function NavLink({href, text, className = ''} : {href: string, text: string, className? : string})
 {
     const pathname = usePathname();
     return(
         <NavbarItem>
-            <Link href={href} className={`${pathname === href ? 'text-accent-600' : ''}`}>{text}</Link>
+            <Link href={href} className={className + " font-bold" + ` ${pathname === href ? 'text-red-500' : 'text-text-900'}`}>{text}</Link>
         </NavbarItem>
     )
 }
 export default function Header()
 {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const menuItems = [
+        {text: 'Убежище', href: '/'},
+        {text: 'Рейтинг', href: '/top'},
+        {text: 'Поддержка', href: '/donate'},
+        {text: 'Правила', href: '/rules'}
+      ];
     return(
-        <Navbar className="bg-background-100 data-[active=true]:after:text-blue-600" isBordered={true}>
+        <Navbar 
+            maxWidth="xl"
+            isMenuOpen={isMenuOpen}
+            onMenuOpenChange={setIsMenuOpen}
+            className="bg-background-100" 
+            isBordered={true}
+        >
             <NavbarBrand>
-                <Link href="/" className="italic font-bold text-accent-500 text-2xl">ENDURANCE</Link>
+                <Link href="/" className="font-lazer text-accent-500 text-3xl">
+                    ENDURANCE
+                </Link>
             </NavbarBrand>
-            <NavbarContent className="text-lg text-otext">
-                <NavLink href="/" text="Убежище"/>
-                <NavLink href="/servers" text="Сервера"/>
-                <NavLink href="/top" text="Рейтинг"/>
-                <NavLink href="/donate" text="Поддержка"/>
+
+            <NavbarContent justify="end" className="hidden md:flex">
+                {menuItems.map((i) => (<NavLink key={i.href} className="text-xl" href={i.href} text={i.text}/>))}
             </NavbarContent>
+
+            <NavbarContent className="flex md:hidden" justify="end">
+                <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+            </NavbarContent>
+
+            <NavbarMenu className="flex items-center space-y-4">
+                {menuItems.map((i) => (<NavLink key={i.href} className="text-3xl" href={i.href} text={i.text}/>))}
+            </NavbarMenu>
         </Navbar>
     )
 }

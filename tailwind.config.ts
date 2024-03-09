@@ -12,6 +12,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'futurot': 'var(--font-futurot)',
+        'lazer': 'var(--font-lazer)',
+        'inter': 'var(--font-inter)'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

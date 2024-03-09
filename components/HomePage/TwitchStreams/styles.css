@@ -1,0 +1,11 @@
+
+.stream-icon{
+    opacity: 5%;
+    transition-duration: 100ms;
+}
+
+.stream-body:hover .stream-icon{
+    opacity: 50%;
+    transition-duration: 100ms;
+}
+
