@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 
-export default function ServerCard({server, size} : {server : Server | null, size: "sm" | "md" | "lg"}){
+export default function ServerCard({server, size} : {server : Server | null, size: "md" | "lg"}){
 
     const [open, setOpened] : [any, any] = useState(false);
     const [scope, animate] : [any, any] = useAnimate();
@@ -69,7 +69,7 @@ export default function ServerCard({server, size} : {server : Server | null, siz
         return <tr key={player.name}><td>{player.name}</td><td>{ftime.join('')}</td></tr>
     }
 
-    const cardStyle = "card-main rounded-none " + (size == "lg" ? "h-32" : (size == "md" ? "h-24" : "h-16"))
+    const cardStyle = (size == "lg" ? "h-32" : (size == "md" ? "h-24" : "h-16"))
     const progressSize = size == "lg" ? "md" : "sm";
     const headerStyle = "font-futurot text-otext " + (size == "lg" ? "text-2xl" : (size == "md" ? "text-xl" : "text-lg"));
     const btnSize = size == "lg" ? "lg" : "sm";
@@ -77,11 +77,24 @@ export default function ServerCard({server, size} : {server : Server | null, siz
     
     return(
         <div className="rounded-2xl overflow-hidden shadow-md bg-background-50" suppressHydrationWarning>
-            <div onClick={() => setOpened(!open && server != null && server.players.length > 0)}>
-                <Card className={cardStyle}>
+            <motion.div 
+            onClick={() => setOpened(!open && server != null && server.players.length > 0)} 
+            animate={{
+                height : size == "lg" ? '8rem' : '6rem'
+            }}
+            >
+                <Card className="card-main rounded-none h-full">
                     <CardHeader className="absolute z-10 top-0 flex-col !items-start">
                         <Skeleton className="rounded-full" isLoaded={isLoaded}>
-                            <h1 className={headerStyle}>{name}</h1>
+                            <motion.h1 
+                                className="font-futurot text-otext"
+                                animate={{
+                                    fontSize: size == 'lg' ? '1.5rem' : '1.25rem',
+                                    lineHeight: size == 'lg' ? '2rem' : '1.75rem'
+                                }}
+                            >
+                                {name}
+                            </motion.h1>
                         </Skeleton>
                     </CardHeader>
                     <Image
@@ -130,7 +143,7 @@ export default function ServerCard({server, size} : {server : Server | null, siz
                         </div>
                     </CardBody>
                 </Card>
-            </div>
+            </motion.div>
             <div></div>
             <AnimatePresence>
                 <motion.div ref={scope} className="hidden">
