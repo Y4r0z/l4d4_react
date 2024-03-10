@@ -19,13 +19,10 @@ export default function ServersList({servers} : {servers : Server[] | null})
         setisLoading(true);
         getServers().then(lst => {
             // Фильтрация пустых серверов по условию и отключенных серверов
-            setData(lst?.filter(s => (s.players.length != 0 || hideMode == 0) && (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24));
+            setData(lst?.filter(s => (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24));
             setisLoading(false);
         });
     }
-    useEffect(() => {
-       updateServers();
-    }, [hideMode])
 
     useEffect(() => {
         const i = setInterval(() => updateServers(), 10000)
@@ -38,7 +35,7 @@ export default function ServersList({servers} : {servers : Server[] | null})
     {
         const size = sizeMode == 0 ? "lg" : "md";
         if (servers == null) return Array.from(Array(10).keys()).map((s) => <ServerCard key={s} server={null} size={size}/>);
-        return servers.map((s : Server, idx) => <ServerCard key={idx} server={s} size={size}/>)
+        return servers.map((s : Server, idx) => <ServerCard key={idx} server={s} size={size} isHidden={s.players.length == 0 && hideMode}/>)
     }
 
     const listBtnStyle = (key : number, mode : number) => {
@@ -73,7 +70,7 @@ export default function ServersList({servers} : {servers : Server[] | null})
                 </ButtonGroup>
                 <ButtonGroup>
                     <Tooltip content="Показать пустные сервера">
-                        <Button key={0} className={listBtnStyle(0, hideMode)} onClick={() => setHideMode(0)} isLoading={isLoading && hideMode==0}>
+                        <Button key={0} className={listBtnStyle(0, hideMode)} onClick={() => setHideMode(0)}>
                             <FontAwesomeIcon icon={faEye} size="lg"/>
                             </Button>
                     </Tooltip>

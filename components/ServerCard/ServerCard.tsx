@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 
-export default function ServerCard({server, size} : {server : Server | null, size: "md" | "lg"}){
+export default function ServerCard({server, size, isHidden = false} : {server : Server | null, size: "md" | "lg", isHidden? : boolean}){
 
     const [open, setOpened] : [any, any] = useState(false);
     const [scope, animate] : [any, any] = useAnimate();
@@ -69,14 +69,12 @@ export default function ServerCard({server, size} : {server : Server | null, siz
         return <tr key={player.name}><td>{player.name}</td><td>{ftime.join('')}</td></tr>
     }
 
-    const cardStyle = (size == "lg" ? "h-32" : (size == "md" ? "h-24" : "h-16"))
     const progressSize = size == "lg" ? "md" : "sm";
-    const headerStyle = "font-futurot text-otext " + (size == "lg" ? "text-2xl" : (size == "md" ? "text-xl" : "text-lg"));
     const btnSize = size == "lg" ? "lg" : "sm";
     const tableStyle = size == "lg" ? "text-lg w-[100%]" : "text-sm w-[100%]"
     
     return(
-        <div className="rounded-2xl overflow-hidden shadow-md bg-background-50" suppressHydrationWarning>
+        <div className={"rounded-2xl overflow-hidden shadow-md bg-background-50" + (isHidden ? " hidden" : '')} suppressHydrationWarning>
             <motion.div 
             onClick={() => setOpened(!open && server != null && server.players.length > 0)} 
             animate={{
