@@ -159,7 +159,11 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
                                     closeDelay={200}>
                                     <span> 
                                         <PopoverTrigger>
-                                                <Button isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} onClick={copyConnect}><FontAwesomeIcon icon={faCopy} size="lg"/></Button>
+                                                <Button isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} onClick={copyConnect}>
+                                                    <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
+                                                        <FontAwesomeIcon icon={faCopy}/>
+                                                    </motion.div>
+                                                </Button>
                                         </PopoverTrigger>
                                     </span>
                                 </Tooltip>
@@ -171,7 +175,11 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
                                 content="Подключиться"
                                 placement="left"
                                 closeDelay={200}>
-                                <Button as={Link} target="_blank" isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} href={`steam://connect/${server?.connect}`}><FontAwesomeIcon icon={faPlay} size="lg"/></Button>
+                                <Button as={Link} target="_blank" isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} href={`steam://connect/${server?.connect}`}>
+                                    <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
+                                        <FontAwesomeIcon icon={faPlay}/>
+                                    </motion.div>
+                                </Button>
                             </Tooltip>
                         </div>
                     </CardBody>
