@@ -23,8 +23,35 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
 
     const [open, setOpened] : [any, any] = useState(false);
     const [scope, animate] : [any, any] = useAnimate();
-
     
+    const duration = 0.3;
+    // Анимация исчезновения 
+    const displayVariants = {
+        show: {
+            display: 'block',
+            opacity: 1,
+            transition: {
+                opacity: {
+                    ease: "easeInOut",
+                    duration: duration
+                }
+            }
+        },
+        hide: {
+            display: 'none',
+            opacity: 0,
+            transition: {
+                display: {
+                    delay: duration
+                },
+                opacity: {
+                    ease: "easeInOut",
+                    duration: duration
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         animate(
           scope.current,
@@ -74,18 +101,26 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
     const tableStyle = size == "lg" ? "text-lg w-[100%]" : "text-sm w-[100%]"
     
     return(
-        <div className={"rounded-2xl overflow-hidden shadow-md bg-background-50" + (isHidden ? " hidden" : '')} suppressHydrationWarning>
+        <motion.div 
+            suppressHydrationWarning
+            initial={false}
+            className="rounded-2xl overflow-hidden shadow-md bg-background-50"
+            variants={displayVariants}
+            animate={isHidden ? 'hide' : 'show'}
+        >
             <motion.div 
-            onClick={() => setOpened(!open && server != null && server.players.length > 0)} 
-            animate={{
-                height : size == "lg" ? '8rem' : '6rem'
-            }}
+                initial={false}
+                onClick={() => setOpened(!open && server != null && server.players.length > 0)} 
+                animate={{
+                    height : size == "lg" ? '8rem' : '6rem'
+                }}
             >
                 <Card className="card-main rounded-none h-full">
                     <CardHeader className="absolute z-10 top-0 flex-col !items-start">
-                        <Skeleton className="rounded-full" isLoaded={isLoaded}>
+                        <Skeleton isLoaded={isLoaded}>
                             <motion.h1 
-                                className="font-futurot text-otext"
+                                initial={false}
+                                className="font-futurot text-otext text-xl"
                                 animate={{
                                     fontSize: size == 'lg' ? '1.5rem' : '1.25rem',
                                     lineHeight: size == 'lg' ? '2rem' : '1.75rem'
@@ -108,7 +143,7 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
                             size={progressSize}
                             value={onlineValue}
                             label={
-                            <Skeleton className="rounded-full" isLoaded={isLoaded}>
+                            <Skeleton isLoaded={isLoaded}>
                                 <p>{onlineStr} {mapName} | {mapRus}</p>
                             </Skeleton>}
                             isIndeterminate={!isLoaded}
@@ -154,6 +189,6 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
                     </table>
                 </motion.div>
             </AnimatePresence>
-        </div>
+        </motion.div>
     )
 }
