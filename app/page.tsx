@@ -26,7 +26,7 @@ export default async function Home() {
           <div><PlayersTop players={players} loadCount={6} pagination={false} showTime={false} textProps="text-lg"/></div>
         </div>
       </div>
-      <div className=" bg-background-100 rounded-xl p-4">
+      <div className="bg-background-100 rounded-xl p-4">
         <h1 className="text-3xl mt-2 mb-4">Трансляции</h1>
         <div><TwitchStreams/></div>
       </div>
