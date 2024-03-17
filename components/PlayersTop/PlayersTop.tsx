@@ -72,8 +72,8 @@ export default function PlayersTop(
 
     const getColumns = () => {
         const cols = [<TableColumn key={1} className={textProps}>Никнейм</TableColumn>];
-        if (showPoints) cols.push(<TableColumn key={2} className={textProps + (showTime ? "" : " text-right")}>Всего поинтов</TableColumn>);
-        if (showTime) cols.push(<TableColumn key={3} className={textProps}>Время игры</TableColumn>);
+        if (showPoints) cols.push(<TableColumn key={2} className={textProps + (showTime ? "" : " text-right")}>Поинты</TableColumn>);
+        if (showTime) cols.push(<TableColumn key={3} className={textProps}>Время</TableColumn>);
         return cols;
     }
     const getRowCells = (p : TopPlayer) => {
@@ -91,7 +91,7 @@ export default function PlayersTop(
     }
     return(
         <Table
-            className="min-w-[24rem]"
+            className="min-w-[14rem]"
             aria-label="Топ игроков"
             baseRef={pagination ? scrollRef : null}
             bottomContent={

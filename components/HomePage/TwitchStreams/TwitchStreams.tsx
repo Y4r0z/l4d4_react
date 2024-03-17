@@ -12,7 +12,7 @@ export default async function TwitchStreams()
     return(
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {streams && streams.map((s) => (
-                <Card key={s.id}>
+                <Card key={s.id + s.streamLink}>
                     <CardBody className="stream-body">
                         <a href={s.streamLink} className="relative">
                         <div className="absolute top-1 left-1 rounded-xl bg-red-500 py-1 px-2">LIVE</div>

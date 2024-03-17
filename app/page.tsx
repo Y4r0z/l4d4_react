@@ -14,16 +14,16 @@ export default async function Home() {
   const dayOnline = await getOnlineDay() ?? 0;
 
   return (
-    <main className="flex flex-col py-12 px-8 md:px-8 lg:px-24 xl:px-48 gap-8">
+    <main className="flex flex-col py-4 md:py-12 px-0 md:px-8 lg:px-24 xl:px-48 gap-8">
       <div className="flex flex-col md:flex-row justify-between gap-4">
         <div className="flex flex-col gap-4 w-full">
           <div className="bg-background-100 p-4 rounded-xl h-full"><ServersList servers={servers}/></div>
         </div>
         <div className="flex flex-col gap-4">
           <div className="p-4 rounded-xl bg-background-100 text-lg">Онлайн за сутки: {dayOnline.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
-          <div><ImageCarousel/></div>
+          <div className="p-4 rounded-xl bg-background-100 md:p-0"><ImageCarousel/></div>
           <div className="bg-background-100 rounded-xl"><DayStats/></div>
-          <div><PlayersTop players={players} loadCount={6} pagination={false} showTime={false} textProps="text-lg"/></div>
+          <div className="p-2 rounded-xl md:p-0 min-w-[12rem] 2xl:min-w-[24rem]"><PlayersTop players={players} loadCount={6} pagination={false} showTime={false} textProps="text-lg"/></div>
         </div>
       </div>
       <div className="bg-background-100 rounded-xl p-4">

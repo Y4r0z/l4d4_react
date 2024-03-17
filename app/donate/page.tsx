@@ -24,13 +24,13 @@ export default async function DonatePage(){
     }
 
     return(
-        <div className="px-8 md:px-16 lg:px-32 py-8 my-8 mx-8 md:mx-16 lg:mx-48 bg-background-100 rounded-xl" suppressHydrationWarning>
+        <div className="px-8 md:px-16 lg:px-32 py-4 my-4 mx-0 md:mx-16 lg:mx-24 xl:mx-36 2xl:mx-48 bg-background-100 rounded-xl">
             <div className="flex flex-col items-center text-xl mb-16 gap-4">
                 <h2 className="text-3xl">Пантеон славы 🏛️</h2>
                 <p>Спасибо за поддержку нашего проекта ❤️</p>
                 <p>Присоединяйся к нашей тусовке на <span className="text-amber-600 font-bold text-xl"><a href="https://boosty.to/endurancel4d2">Boosty</a></span>!</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-16">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-16">
                 {
                 players && players.map(async (dp) => {
                     const p = await getSteam(dp.STEAM_ID);

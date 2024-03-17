@@ -50,9 +50,9 @@ export default function ServersList({servers} : {servers : Server[] | null})
 
     return(
     <div className="flex flex-col gap-4">
-        <div className="flex-col md:flex-row justify-between my-4 gap-4 hidden md:flex">
-            <div className="flex flex-col md:flex-row gap-4">
-                <ButtonGroup>
+        <div className="flex flex-row justify-between my-4 gap-4 ">
+            <div className="flex flex-row gap-4">
+                <ButtonGroup className="hidden lg:flex">
                     <Tooltip content="Список">
                         <Button key={0} className={listBtnStyle(0, listMode)} onClick={() => setListMode(0)}><FontAwesomeIcon icon={faList} size="lg"/></Button>
                     </Tooltip>
@@ -81,7 +81,7 @@ export default function ServersList({servers} : {servers : Server[] | null})
                     </Tooltip>
                 </ButtonGroup>
             </div>
-            <div>
+            <div className="hidden lg:flex">
                 <Tooltip content="Обновить список серверов">
                     <Button className="bg-background-200" isLoading={isLoading} onClick={() => updateServers()}><FontAwesomeIcon icon={faArrowsRotate} size="lg"/></Button>
                 </Tooltip>

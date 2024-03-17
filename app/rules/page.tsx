@@ -12,7 +12,7 @@ export default function RulesPage()
     const [lang, setLang] : [Language, any] = useState('Русский');
 
     return(
-        <div className="mx-8 my-8 px-8 py-8 md:mx-16 lg:mx-32 xl:mx-48 md:px-16 rounded-xl bg-background-100">
+        <div className="mx-0 my-4 md:my-8 px-4 py-8 md:mx-16 lg:mx-32 xl:mx-48 md:px-16 rounded-xl bg-background-100">
             <div className="flex flex-col">
                 <h1 className="text-3xl">{langObj.languageTexts[lang].mainText}</h1>
                 <p className="text-lg my-4">{langObj.languageTexts[lang].subText} <a className="text-red-500" href="https://t.me/EnduranceSupport_bot">Telegram Bot</a>.</p>
@@ -30,8 +30,8 @@ export default function RulesPage()
                 <div className="flex flex-col space-y-4">
                     {langObj.languageTexts[lang].rules.map((r) => (
                         <div key={r.title} className="bg-background-50 p-4 rounded-xl">
-                            <h4 className="text-2xl">{r.title}</h4>
-                            <p className="text-lg text-text-900">{r.description}</p>
+                            <h4 className="text-lg md:text-2xl">{r.title}</h4>
+                            <p className="text-sm md:text-xl text-text-900 pt-2">{r.description}</p>
                         </div>
                     ))}
                 </div>
