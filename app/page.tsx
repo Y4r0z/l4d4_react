@@ -10,7 +10,7 @@ import TwitchStreams from "@/components/HomePage/TwitchStreams/TwitchStreams";
 
 export default async function Home() {
   const servers = await getServers();
-  const players = await getTopPlayers(0, 6);
+  const players = await getTopPlayers(0, 12);
   const dayOnline = await getOnlineDay() ?? 0;
 
   return (
@@ -23,7 +23,15 @@ export default async function Home() {
           <div className="p-4 rounded-xl bg-background-100 text-lg">Онлайн за сутки: {dayOnline.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
           <div className="p-4 rounded-xl bg-background-100 md:p-0"><ImageCarousel/></div>
           <div className="bg-background-100 rounded-xl"><DayStats/></div>
-          <div className="p-2 rounded-xl md:p-0 min-w-[12rem] 2xl:min-w-[24rem]"><PlayersTop players={players} loadCount={6} pagination={false} showTime={false} textProps="text-lg"/></div>
+          <div className="p-2 rounded-xl md:p-0 min-w-[12rem] 2xl:min-w-[24rem] max-h-[32rem] overflow-hidden">
+            <PlayersTop 
+              className="max-h-[26rem]"
+              players={players} 
+              loadCount={12} 
+              pagination={true} 
+              showTime={false} 
+              textProps="text-lg"/>
+          </div>
         </div>
       </div>
       <div className="bg-background-100 rounded-xl p-4">

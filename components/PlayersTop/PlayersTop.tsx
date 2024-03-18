@@ -12,11 +12,12 @@ import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
 export default function PlayersTop(
     {
         players,
-        loadCount = 32,
+        loadCount = 16,
         showPoints = true,
         showTime = true,
         pagination = true,
-        textProps = "text-xl"
+        textProps = "text-xl",
+        className = "max-h-[92vh] md:max-h-[85vh]"
     }
     : 
     {
@@ -25,13 +26,14 @@ export default function PlayersTop(
         showPoints? : boolean,
         showTime? : boolean,
         pagination? : boolean,
-        textProps? : string
+        textProps? : string,
+        className? : string
     }
 )
 {
     const count = loadCount;
     const [data, setData] : [any, any] = useState(players);
-    const [isLoading, setIsLoading] : [any, any] = useState(true);
+    const [isLoading, setIsLoading] : [any, any] = useState(data == null);
     const [hasMore, setHasMore] : [any, any] = useState(false);
     useEffect(() => {
         if(players == null) getTopPlayers(0, count).then((p) => setData(p));
@@ -91,7 +93,8 @@ export default function PlayersTop(
     }
     return(
         <Table
-            className="min-w-[14rem]"
+            isHeaderSticky
+            className={`min-w-[14rem] overflow-y-scroll ${className}`}
             aria-label="Топ игроков"
             baseRef={pagination ? scrollRef : null}
             bottomContent={
@@ -106,7 +109,7 @@ export default function PlayersTop(
                 {getColumns()}
             </TableHeader>
             <TableBody 
-                isLoading={(isLoading || data == null) && pagination}
+                isLoading={isLoading}
                 items={list.items as TopPlayer[]}
                 loadingContent={<Spinner color="white" />}
             >
