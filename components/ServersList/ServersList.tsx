@@ -45,7 +45,7 @@ export default function ServersList({servers} : {servers : Server[] | null})
     const lstStyle = () =>
     {
         if(listMode == 0) return "w-full gap-4 flex flex-col"
-        else return "w-full gap-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3"
+        else return "w-full gap-4 grid grid-cols-1 xl:grid-cols-2 min-[1720px]:grid-cols-3"
     }
 
     return(
