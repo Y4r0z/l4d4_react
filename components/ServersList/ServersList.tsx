@@ -7,7 +7,16 @@ import { Button, ButtonGroup, Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faGrip, faExpand, faCompress, faEye, faEyeSlash, faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
-export default function ServersList({servers} : {servers : Server[] | null})
+export default function ServersList
+(
+    {
+        servers,
+    } 
+    : 
+    {
+        servers : Server[] | null,
+    }
+)
 {
     const [data, setData] : [Server[] | null, any] = useState(servers);
     const [listMode, setListMode] : [any, any] = useState(0);
@@ -18,12 +27,10 @@ export default function ServersList({servers} : {servers : Server[] | null})
     const updateServers = () => {
         setisLoading(true);
         getServers().then(lst => {
-            // Фильтрация пустых серверов по условию и отключенных серверов
-            setData(lst?.filter(s => (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24));
+            setData(lst);
             setisLoading(false);
         });
     }
-
     useEffect(() => {
         const i = setInterval(() => updateServers(), 10000)
         return () =>{

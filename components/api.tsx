@@ -35,9 +35,10 @@ export async function myFetch<Type>(href : string, settings : any = {})
 
 export async function getServers()
 {
-    const data = await myFetch<Server[]>('v1/server/0', {next:{revalidate: 15}});
+    let data = await myFetch<Server[]>('v1/server/0', {next:{revalidate: 15}});
     if(data == null) return null; 
-    data.sort((a, b) => b.players.length - a.players.length)
+    data = data.filter(s => (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24);
+    data.sort((a, b) => b.players.length - a.players.length);
     return data;
 }
 

@@ -1,18 +1,17 @@
 'use server'
-import Image from "next/image";
 import { getOnlineDay, getServerById, getServers, getTopPlayers} from "@/components/api"
-import ServerCard from "@/components/ServerCard/ServerCard";
 import ServersList from "@/components/ServersList/ServersList";
 import ImageCarousel from "@/components/HomePage/ImageCarousel/ImageCarousel";
 import DayStats from "@/components/HomePage/DayStats/DayStats";
 import PlayersTop from "@/components/PlayersTop/PlayersTop";
 import TwitchStreams from "@/components/HomePage/TwitchStreams/TwitchStreams";
 
+
 export default async function Home() {
   const servers = await getServers();
   const players = await getTopPlayers(0, 12);
   const dayOnline = await getOnlineDay() ?? 0;
-
+  
   return (
     <main className="flex flex-col py-4 md:py-12 px-0 md:px-8 lg:px-24 xl:px-48 gap-8">
       <div className="flex flex-col md:flex-row justify-between gap-4">
