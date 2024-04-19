@@ -11,10 +11,12 @@ export const DependsOn = (variable, element ) =>{
     return variable ? element : <></>
 }
 
+// Слайдер с QR кодами на главной странице.
 // Формат:
 // Весь блок окружен квадратными скобками
-// Каждая глвая страничка в квадратных скобках:
+// Каждая страничка в квадратных скобках:
 // внутри 3 параметра в кавычках: [ путь до картинки из папки `public`, ссылка, описание ]
+// можно убирать или добавлять новые
 export const imageCarouselData = [
     ["/slides/ds.png", "https://discord.com/invite/tdrRDat", "Ссылка на дискорд"],
     ["/slides/vk.png", "https://vk.com/endurancel4d2", "Ссылка на ВК"],
