@@ -7,23 +7,28 @@ import { Button, ButtonGroup, Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faGrip, faExpand, faCompress, faEye, faEyeSlash, faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { useMap } from "usehooks-ts";
+import { setCookie } from 'cookies-next';
+import { cookies } from "next/headers";
 
 export default function ServersList
 (
     {
         servers,
+        states,
     } 
     : 
     {
         servers : Server[] | null,
+        states : {listMode : number, sizeMode : number, hideMode : number}
     }
 )
 {
+
     const [data, setData] : [Server[] | null, any] = useState(servers);
-    const [listMode, setListMode] : [any, any] = useState(0);
-    const [sizeMode, setSizeMode] : [any, any] = useState(0);
-    const [hideMode, setHideMode] : [any, any] = useState(0);
-    const [isLoading, setisLoading] : [any, any] = useState(false);
+    const [listMode, setListMode] : [number, any] = useState(states.listMode);
+    const [sizeMode, setSizeMode] : [number, any] = useState(states.sizeMode);
+    const [hideMode, setHideMode] : [number, any] = useState(states.hideMode);
+    const [isLoading, setisLoading] : [boolean, any] = useState(false);
     const [opened, openedActions] = useMap<number, boolean>(); 
 
     const updateServers = () => {
@@ -40,11 +45,17 @@ export default function ServersList
         }
     }, []);
 
+    useEffect(() => {
+        setCookie("servers_listMode", listMode.toString(), {sameSite:true});
+        setCookie("servers_sizeMode", sizeMode.toString(), {sameSite:true});
+        setCookie("servers_hideMode", hideMode.toString(), {sameSite:true});
+    }, [listMode, sizeMode, hideMode])
+
     function buildServers(servers : Server[] | null)
     {
         const size = sizeMode == 0 ? "lg" : "md";
         if (servers == null) return Array.from(Array(10).keys()).map((s) => <ServerCard key={s} server={null} openedMap={opened} openedActions={openedActions} size={size}/>);
-        return servers.map((s : Server, idx) => <ServerCard key={idx} server={s} size={size} openedMap={opened} openedActions={openedActions} isHidden={s.players.length == 0 && hideMode}/>)
+        return servers.map((s : Server, idx) => <ServerCard key={idx} server={s} size={size} openedMap={opened} openedActions={openedActions} isHidden={s.players.length == 0 && hideMode == 1}/>)
     }
 
     const listBtnStyle = (key : number, mode : number) => {
