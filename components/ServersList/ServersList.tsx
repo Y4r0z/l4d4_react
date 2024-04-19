@@ -45,9 +45,9 @@ export default function ServersList
     }, []);
 
     useEffect(() => {
-        setCookie("servers_listMode", listMode.toString(), {sameSite:true});
-        setCookie("servers_sizeMode", sizeMode.toString(), {sameSite:true});
-        setCookie("servers_hideMode", hideMode.toString(), {sameSite:true});
+        setCookie("servers_listMode", listMode.toString(), {sameSite:'none', secure:true});
+        setCookie("servers_sizeMode", sizeMode.toString(), {sameSite:'none', secure:true});
+        setCookie("servers_hideMode", hideMode.toString(), {sameSite:'none', secure:true});
     }, [listMode, sizeMode, hideMode])
 
     function buildServers(servers : Server[] | null)
