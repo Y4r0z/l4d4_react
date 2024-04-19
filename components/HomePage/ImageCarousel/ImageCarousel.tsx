@@ -4,15 +4,11 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import {Image} from '@nextui-org/react';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { GlobalConfig, imageCarouselData } from '@/app/app.config';
 
 export default function ImageCarousel()
 {
-    const data : [string, string, string][] = [
-        ["/slides/ds.png", "https://discord.com/invite/tdrRDat", "Ссылка на дискорд"],
-        ["/slides/vk.png", "https://vk.com/endurancel4d2", "Ссылка на ВК"],
-        ["/slides/tg.png", "https://t.me/EnduranceSupport_bot'", "Ссылка на телегу"],
-        ["/slides/boosty.png", "https://boosty.to/endurancel4d2", "Ссылка на бусти"]
-    ]
+    const data : [string, string, string][] = imageCarouselData as [string, string, string][];
     return(
         <div className='w-full'>
             <CarouselProvider

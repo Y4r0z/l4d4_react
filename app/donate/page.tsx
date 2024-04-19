@@ -1,13 +1,12 @@
 'use server'
 
 import { PrivilegeToBorder, PrivilegeToString, PrivilegeToTextColor, getDonatePlayers, getSteam } from "@/components/api"
-import { Avatar } from "@nextui-org/avatar";
 import Image from "next/image";
+import {GlobalConfig, DependsOn} from "../app.config.js"
 
 export default async function DonatePage(){
 
     const players = await getDonatePlayers();
-
 
     function getTimeAndMessage(unixTime : number) {
         if (unixTime === 2000000000) {
@@ -28,7 +27,7 @@ export default async function DonatePage(){
             <div className="flex flex-col items-center text-xl mb-16 gap-4">
                 <h2 className="text-3xl">Пантеон славы 🏛️</h2>
                 <p>Спасибо за поддержку нашего проекта ❤️</p>
-                <p>Присоединяйся к нашей тусовке на <span className="text-amber-600 font-bold text-xl"><a href="https://boosty.to/endurancel4d2">Boosty</a></span>!</p>
+                {DependsOn(GlobalConfig.boosty, <p>Присоединяйся к нашей тусовке на <span className="text-amber-600 font-bold text-xl"><a href={GlobalConfig.boosty}>Boosty</a></span>!</p>)}
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-16">
                 {

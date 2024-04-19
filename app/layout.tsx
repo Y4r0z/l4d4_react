@@ -4,7 +4,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "@/components/Header";
-
+import {GlobalConfig} from "./app.config.js"
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const futurot = localFont(
@@ -24,7 +24,7 @@ const lazer = localFont(
 
 
 export const metadata: Metadata = {
-  title: "Endurance",
+  title: GlobalConfig.sitename,
   description: "Сервера L4D2",
   icons: {
     icon: './logo2.ico'

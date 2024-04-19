@@ -3,7 +3,7 @@
 import { Rules, RulesType, Language } from "@/components/tools/rules";
 import { Select, SelectItem } from "@nextui-org/react";
 import { useState } from "react"
-
+import {GlobalConfig, DependsOn} from "../app.config.js"
 
 export default function RulesPage()
 {
@@ -15,7 +15,7 @@ export default function RulesPage()
         <div className="mx-0 my-4 md:my-8 px-4 py-8 md:mx-16 lg:mx-32 xl:mx-48 md:px-16 rounded-xl bg-background-100">
             <div className="flex flex-col">
                 <h1 className="text-3xl">{langObj.languageTexts[lang].mainText}</h1>
-                <p className="text-lg my-4">{langObj.languageTexts[lang].subText} <a className="text-red-500" href="https://t.me/EnduranceSupport_bot">Telegram Bot</a>.</p>
+                {DependsOn(GlobalConfig.tg, <p className="text-lg my-4">{langObj.languageTexts[lang].subText} <a className="text-red-500" href={GlobalConfig.tg}>Telegram Bot</a>.</p>)}
                 <Select 
                     aria-label="language"
                     defaultSelectedKeys={['Русский']} 

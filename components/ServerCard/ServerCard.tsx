@@ -18,6 +18,7 @@ import { motion, useAnimate, AnimatePresence} from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
+import { GlobalConfig } from "@/app/app.config";
 
 export default function ServerCard(
     {
@@ -91,7 +92,7 @@ export default function ServerCard(
     let mapName = server == null ? "l4d4_map" : server.map.toLowerCase();
     let mapRus = server == null ? "Неизвестная карта" : findChapterById(server.map).chapterName;
     let mapImage = server == null ? "/placeholder-image.jpg" : `/maps/${server.map}.jpg`
-    let name = server == null ? "Endurance Server" : server.name.replace('|', ' ');
+    let name = server == null ? `${GlobalConfig.sitename} Server` : server.name.replace('|', ' ');
     let onlineStr = server == null ? "0/0" : `${server.players.length}/${server.maxplayers}`;
     let onlineValue : number = server == null ? 0 : Math.round((server.players.length/server.maxplayers) * 100);
     const chooseColor = (v : number) => {

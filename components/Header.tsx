@@ -11,6 +11,7 @@ import {
   } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { GlobalConfig } from "@/app/app.config";
 
 export function NavLink({href, text, className = ''} : {href: string, text: string, className? : string})
 {
@@ -40,7 +41,7 @@ export default function Header()
         >
             <NavbarBrand>
                 <Link href="/" className="font-lazer text-accent-500 text-3xl">
-                    ENDURANCE
+                    {(GlobalConfig.sitename as string).toUpperCase()}
                 </Link>
             </NavbarBrand>
 

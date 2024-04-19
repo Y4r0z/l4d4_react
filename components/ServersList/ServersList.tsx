@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faGrip, faExpand, faCompress, faEye, faEyeSlash, faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { useMap } from "usehooks-ts";
 import { setCookie } from 'cookies-next';
-import { cookies } from "next/headers";
 
 export default function ServersList
 (
