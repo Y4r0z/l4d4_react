@@ -13,15 +13,29 @@ import {
 import './styles.css'
 import { findChapterById } from "../tools/campaign";
 import Link from "next/link";
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode, SetStateAction, Dispatch } from "react";
 import { motion, useAnimate, AnimatePresence} from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlay } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 
-export default function ServerCard({server, size, isHidden = false} : {server : Server | null, size: "md" | "lg", isHidden? : boolean}){
-
-    const [open, setOpened] : [any, any] = useState(false);
+export default function ServerCard(
+    {
+        server,
+        size,
+        openedMap,
+        openedActions,
+        isHidden = false}
+    :
+    {
+        server : Server | null, 
+        size: "md" | "lg", 
+        openedMap : Omit<Map<number, boolean>, "set" | "clear" | "delete">, 
+        openedActions : any, 
+        isHidden? : boolean
+    }
+)
+    {
     const [scope, animate] : [any, any] = useAnimate();
     
     const duration = 0.3;
@@ -52,7 +66,10 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
         }
     }
 
+    
     useEffect(() => {
+        if(server == null) return;
+        const open = openedMap.get(server.serverId);
         animate(
           scope.current,
           {
@@ -66,7 +83,7 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
             duration: 0.4
           }
         );     
-      }, [open]);
+      }, [openedMap, server]);
       
     
     let isLoaded : boolean = server != null;
@@ -110,7 +127,11 @@ export default function ServerCard({server, size, isHidden = false} : {server : 
         >
             <motion.div 
                 initial={false}
-                onClick={() => setOpened(!open && server != null && server.players.length > 0)} 
+                onClick={() => {
+                    if(server == null) return;
+                    const flag = !openedMap.get(server.serverId) && server.players.length > 0;
+                    openedActions.set(server.serverId, flag);
+                }} 
                 animate={{
                     height : size == "lg" ? '8rem' : '6rem'
                 }}

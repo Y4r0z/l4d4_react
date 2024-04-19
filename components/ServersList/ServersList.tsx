@@ -6,6 +6,7 @@ import {Server} from "../types";
 import { Button, ButtonGroup, Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faGrip, faExpand, faCompress, faEye, faEyeSlash, faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import { useMap } from "usehooks-ts";
 
 export default function ServersList
 (
@@ -23,16 +24,17 @@ export default function ServersList
     const [sizeMode, setSizeMode] : [any, any] = useState(0);
     const [hideMode, setHideMode] : [any, any] = useState(0);
     const [isLoading, setisLoading] : [any, any] = useState(false);
+    const [opened, openedActions] = useMap<number, boolean>(); 
 
     const updateServers = () => {
         setisLoading(true);
         getServers().then(lst => {
             setData(lst);
-            setisLoading(false);
+            setisLoading(false);;
         });
     }
     useEffect(() => {
-        const i = setInterval(() => updateServers(), 10000)
+        const i = setInterval(() => updateServers(), 10000);
         return () =>{
             clearInterval(i);
         }
@@ -41,8 +43,8 @@ export default function ServersList
     function buildServers(servers : Server[] | null)
     {
         const size = sizeMode == 0 ? "lg" : "md";
-        if (servers == null) return Array.from(Array(10).keys()).map((s) => <ServerCard key={s} server={null} size={size}/>);
-        return servers.map((s : Server, idx) => <ServerCard key={idx} server={s} size={size} isHidden={s.players.length == 0 && hideMode}/>)
+        if (servers == null) return Array.from(Array(10).keys()).map((s) => <ServerCard key={s} server={null} openedMap={opened} openedActions={openedActions} size={size}/>);
+        return servers.map((s : Server, idx) => <ServerCard key={idx} server={s} size={size} openedMap={opened} openedActions={openedActions} isHidden={s.players.length == 0 && hideMode}/>)
     }
 
     const listBtnStyle = (key : number, mode : number) => {
