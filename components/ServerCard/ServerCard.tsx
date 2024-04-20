@@ -91,7 +91,7 @@ export default function ServerCard(
 
     let mapName = server == null ? "l4d4_map" : server.map.toLowerCase();
     let mapRus = server == null ? "Неизвестная карта" : findChapterById(server.map).chapterName;
-    let mapImage = server == null ? "/placeholder-image.jpg" : `/maps/${server.map}.jpg`
+    let mapImage = server == null ? "/placeholder-image.jpg" : `/maps/${server.map.toLowerCase()}.jpg`
     let name = server == null ? `${GlobalConfig.sitename} Server` : server.name.replace('|', ' ');
     let onlineStr = server == null ? "0/0" : `${server.players.length}/${server.maxplayers}`;
     let onlineValue : number = server == null ? 0 : Math.round((server.players.length/server.maxplayers) * 100);
