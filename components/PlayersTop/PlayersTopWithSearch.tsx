@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TopPlayer } from "../types";
 import { Input } from "@nextui-org/input";
 import { Button, ButtonGroup } from "@nextui-org/button";
@@ -28,7 +28,10 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
 
     const getTopControl = () => {
         if(searchMode)
-            return <PlayersTop players={players} textProps="text-md md:text-lg rounded-xl" pagination={false}/>
+        {
+            if(players != undefined && players?.length > 0) return <PlayersTop players={players} textProps="text-md md:text-lg rounded-xl" pagination={false}/>
+            else return <div className="text-3xl flex justify-center">Ничего не найдено...</div>
+        }
         else
             return <PlayersTop players={players} textProps="text-md md:text-lg rounded-xl"/>
     }
@@ -48,7 +51,7 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
                         }}
                     />
                     <div className="overflow-hidden rounded-r-xl flex flex-row items-center h-14 bg-[#3F3F46] w-32 justify-between">
-                    <Button className="rounded-none w-14 h-14" isIconOnly isLoading={loading} onClick={async () => setSearchMode(false)}>
+                    <Button className="rounded-none w-14 h-14" isIconOnly onClick={async () => {setSearchMode(false); setValue("");}}>
                         <FontAwesomeIcon icon={faXmark} size="xl"/>
                     </Button>
                     <Divider orientation="vertical" className="h-9"/>
