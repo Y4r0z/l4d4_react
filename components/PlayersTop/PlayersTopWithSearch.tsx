@@ -21,10 +21,14 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
         setSearchMode(true);
         setLoading(true);
         var p = await searchPlayer(value);
-        console.log(p?.length);
         setPlayers(p);
         setLoading(false);
     };
+
+    const handleKeyDown = (event : React.KeyboardEvent<HTMLInputElement> | KeyboardEvent) => {
+        if(event.key != "Enter") return;
+        startPlayerSearch();
+    } 
 
     const getTopControl = () => {
         if(searchMode)
@@ -41,6 +45,7 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
                 <div className="flex flex-row items-center">
                     <Input
                         value={value}
+                        onKeyDown={(key) => handleKeyDown(key)}
                         onValueChange={setValue}
                         label="Поиск игрока"
                         classNames={{

@@ -115,7 +115,7 @@ export default function PlayersTop(
             >
             {
                 (p) => (
-                    <TableRow key={p.STEAM_ID} className="hover:bg-gray-800 cursor-pointer" href={`/player/${p.STEAM_ID}`} target="_blank">
+                    <TableRow key={p.STEAM_ID + p.LastConnectionTime} className="hover:bg-gray-800 cursor-pointer" href={`/player/${p.STEAM_ID}`} target="_blank">
                         {getRowCells(p)}
                     </TableRow>
                 )
