@@ -7,18 +7,24 @@ import {
     NavbarItem, 
     NavbarMenuToggle,
     NavbarMenu,
-    NavbarMenuItem
+    NavbarMenuItem,
+    Divider,
+    Dropdown,
+    DropdownTrigger,
+    Button,
+    DropdownMenu,
+    DropdownItem
   } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { GlobalConfig } from "@/app/app.config";
 
-export function NavLink({href, text, className = ''} : {href: string, text: string, className? : string})
+export function NavLink({href, text, className = '', onclick=null} : {href: string, text: string, className? : string, onclick?:any})
 {
     const pathname = usePathname();
     return(
-        <NavbarItem>
-            <Link href={href} className={className + " font-bold" + ` ${pathname === href ? 'text-red-500' : 'text-text-900'}`}>{text}</Link>
+        <NavbarItem onClick={onclick}>
+            <Link href={href} className={className + " font-bold border-b-0 transition-[border-width] hover:border-b-3 border-oaccent" + ` ${pathname === href ? 'text-red-500' : 'text-text-900'}`}>{text}</Link>
         </NavbarItem>
     )
 }
@@ -29,9 +35,13 @@ export default function Header()
         {text: 'Убежище', href: '/'},
         {text: 'Рейтинг', href: '/top'},
         {text: 'Поддержка', href: '/donate'},
+      ];
+    const dropdownItems = [
         {text: 'Команда', href: '/team'},
         {text: 'Правила', href: '/rules'}
-      ];
+    ]
+    const allItems = menuItems.concat(dropdownItems);
+
     return(
         <Navbar 
             maxWidth="xl"
@@ -48,6 +58,16 @@ export default function Header()
 
             <NavbarContent justify="end" className="hidden md:flex">
                 {menuItems.map((i) => (<NavLink key={i.href} className="text-xl" href={i.href} text={i.text}/>))}
+                <Dropdown showArrow={true}>
+                    <NavbarItem>
+                        <DropdownTrigger>
+                            <Button disableRipple className="p-0 bg-transparent text-xl font-bold text-text-900">Прочее</Button>
+                        </DropdownTrigger>
+                    </NavbarItem>
+                    <DropdownMenu>
+                        {dropdownItems.map((i) => (<DropdownItem><NavLink key={i.href} className="text-xl" href={i.href} text={i.text}/></DropdownItem>))}
+                    </DropdownMenu>
+                </Dropdown>
             </NavbarContent>
 
             <NavbarContent className="flex md:hidden" justify="end">
@@ -55,7 +75,7 @@ export default function Header()
             </NavbarContent>
 
             <NavbarMenu className="flex items-center space-y-4">
-                {menuItems.map((i) => (<NavLink key={i.href} className="text-3xl" href={i.href} text={i.text}/>))}
+                {allItems.map((i) => (<NavLink key={i.href} className="text-3xl" href={i.href} text={i.text} onclick={() => setIsMenuOpen(false)}/>))}
             </NavbarMenu>
         </Navbar>
     )

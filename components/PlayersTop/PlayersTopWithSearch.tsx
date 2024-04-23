@@ -42,7 +42,7 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
 
     return(
         <div className="flex flex-col space-y-8 bg-background-100 rounded-xl p-0 sm:p-0 md:p-8">
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center mt-8 mx-12 md:m-0">
                     <Input
                         value={value}
                         onKeyDown={(key) => handleKeyDown(key)}
