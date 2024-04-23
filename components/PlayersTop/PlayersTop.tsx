@@ -110,7 +110,7 @@ export default function PlayersTop(
             </TableHeader>
             <TableBody 
                 isLoading={isLoading}
-                items={list.items as TopPlayer[]}
+                items={pagination ? list.items as TopPlayer[] : (players != null ? players : list.items as TopPlayer[])}
                 loadingContent={<Spinner color="white" />}
             >
             {

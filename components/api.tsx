@@ -17,6 +17,7 @@ import {
 
 
 const apiBase = process.env.API;
+const apiBase2 = process.env.API2;
 
 export async function myFetch<Type>(href : string, settings : any = {})
 {
@@ -68,6 +69,9 @@ export const getAchievement = async (steam_id : string) => await myFetch<Achieve
 export const getTwitchStreams = async () => await myFetch<TwitchStream[]>('v1/streams/left4dead2');
 
 export const getDonatePlayers = async () => await myFetch<DonatePlayer[]>('v1/donate_players');
+
+export const searchPlayer = async (search : string) => await myFetch<SteamPlayer[]>(`v1/nickname/${search}`);
+
 
 export const PrivilegeToString = (p : Privileges) => {
     switch(p)
