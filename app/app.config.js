@@ -1,6 +1,6 @@
 export const GlobalConfig = {
-    hostname: "l4d4.com",
-    sitename: "Endurance",
+    hostname: "l4d2perks.ru",
+    sitename: "Guardians",
     boosty: "https://boosty.to/endurancel4d2",
     tg: "https://t.me/EnduranceSupport_bot",
     steam: "https://steamcommunity.com/groups/Endurance_l4d2",
