@@ -29,6 +29,7 @@ export default function Header()
         {text: 'Убежище', href: '/'},
         {text: 'Рейтинг', href: '/top'},
         {text: 'Поддержка', href: '/donate'},
+        {text: 'Команда', href: '/team'},
         {text: 'Правила', href: '/rules'}
       ];
     return(

@@ -57,7 +57,7 @@ export const getPlayerInfo = async (steam_id : string) => await myFetch<PlayerIn
 
 export const getSteam = async (steam_id : string) => await myFetch<SteamInfo>(`v1/get_steam/${steam_id}`);
 
-export const getAdmins = async () => await myFetch<string[]>('v1/admin_players');
+export const getAdmins = async () => await myFetch<string[]>('v1/admins_players');
 
 export const getAllTimeScore = async (steam_id : string) => await myFetch<AllTimeScore[]>(`v1/alltimescore/${steam_id}`);
 
