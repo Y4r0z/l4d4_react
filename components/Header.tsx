@@ -65,7 +65,7 @@ export default function Header()
                         </DropdownTrigger>
                     </NavbarItem>
                     <DropdownMenu>
-                        {dropdownItems.map((i) => (<DropdownItem><NavLink key={i.href} className="text-xl" href={i.href} text={i.text}/></DropdownItem>))}
+                        {dropdownItems.map((i) => (<DropdownItem key={i.href}><NavLink className="text-xl" href={i.href} text={i.text}/></DropdownItem>))}
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>
