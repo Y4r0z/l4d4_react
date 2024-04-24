@@ -3,10 +3,20 @@ version: '3.4'
 services:
   l4d4react:
     image: l4d4react
+    container_name: l4d4_react
+    restart: always
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
-    ports:
-      - 3000:3000
+    expose:
+      - 3000
+    networks:
+      - default
+
+networks:
+  default:
+    external: true
+    name: evilcorp
+
