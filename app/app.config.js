@@ -3,7 +3,7 @@ export const GlobalConfig = {
     sitename: "Guardians",
     boosty: "https://boosty.to/guardiansperkmod",
     tg: undefined, //"https://t.me/EnduranceSupport_bot"
-    steam: undefined,
+    steam: "https://steamcommunity.com/groups/guardiansperkmod",
     discord: "https://discord.gg/RNVGsk6AFe",
     vk: undefined, //"https://vk.com/endurancel4d2"
     bans: "https://ban.l4d2perks.ru/",
