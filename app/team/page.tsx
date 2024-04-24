@@ -14,7 +14,7 @@ export default async function TeamPage()
                 <p>Небольшая команда игроков, желающих создать новый и разнообразный опыт в Left 4 Dead 2.</p>
             </div>
             <h2 className="text-4xl flex flex-col items-center font-semibold mt-12 mb-8">Команда проекта</h2>
-            <div className="flex flex-wrap justify-center space-x-20 items-center">
+            <div className="flex flex-wrap justify-center items-center gap-20">
                 {
                 admins?.map(async (STEAM_ID) => {
                     const p = await getSteam(STEAM_ID);

@@ -1,4 +1,5 @@
 'use server'
+import { GlobalConfig } from "@/app/app.config";
 import { 
     Privileges,
     Server,  
@@ -16,8 +17,8 @@ import {
 } from "./types";
 
 
-const apiBase = process.env.API;
-const apiBase2 = process.env.API2;
+const apiBase = GlobalConfig.api;
+const apiBase2 = GlobalConfig.api2;
 
 export async function myFetch<Type>(href : string, settings : any = {})
 {
