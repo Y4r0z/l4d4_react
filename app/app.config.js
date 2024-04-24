@@ -2,10 +2,10 @@ export const GlobalConfig = {
     hostname: "l4d2perks.ru",
     sitename: "Guardians",
     boosty: "https://boosty.to/guardiansperkmod",
-    //tg: "https://t.me/EnduranceSupport_bot",
-    steam: "https://steamcommunity.com/groups/guardiansperkmod",
+    tg: undefined, //"https://t.me/EnduranceSupport_bot"
+    steam: undefined,
     discord: "https://discord.gg/RNVGsk6AFe",
-    //vk: "https://vk.com/endurancel4d2",
+    vk: undefined, //"https://vk.com/endurancel4d2"
     bans: "https://ban.l4d2perks.ru/",
     wiki: "https://wiki.l4d2perks.ru/ru/home",
     api: "https://l4d2perks.ru/api",
