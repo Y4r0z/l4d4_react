@@ -12,7 +12,9 @@ export default async function DayStats()
     return(
         <div className="flex flex-col justify-start p-2 cursor-default">
             <div className="text-2xl flex justify-center align-middle">Статистика   
-                {DependsOn(GlobalConfig.steam, <a className="ml-1 font-bold text-oaccent" href={GlobalConfig.steam}>Steam</a>)}
+                {DependsOn(GlobalConfig.steam, 
+                    <a className="ml-1 font-bold text-oaccent" href={GlobalConfig.steam}>Steam</a>
+                )}
             </div>
             <div className="text-xl pt-0">
                 <Tooltip 

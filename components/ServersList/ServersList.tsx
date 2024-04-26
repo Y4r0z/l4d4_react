@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faGrip, faExpand, faCompress, faEye, faEyeSlash, faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { useMap } from "usehooks-ts";
 import { setCookie } from 'cookies-next';
+import { animate, motion } from "framer-motion";
 
 export default function ServersList
 (
@@ -67,6 +68,17 @@ export default function ServersList
         else return "w-full gap-4 grid grid-cols-1 xl:grid-cols-2 min-[1720px]:grid-cols-3"
     }
 
+
+    const refreshAnims = {
+        rotate: {
+            rotate: 360,
+            transition: {duration: 0.5, repeat:Infinity, ease:'linear'}
+        },
+        stop: { 
+            transition: {durattion: 0, repeat:1}
+        }
+    }
+
     return(
     <div className="flex flex-col gap-4">
         <div className="flex flex-row justify-between my-4 gap-4 ">
@@ -102,7 +114,14 @@ export default function ServersList
             </div>
             <div className="hidden lg:flex">
                 <Tooltip content="Обновить список серверов">
-                    <Button className="bg-background-200" isLoading={isLoading} onClick={() => updateServers()}><FontAwesomeIcon icon={faArrowsRotate} size="lg"/></Button>
+                    <Button className="bg-background-200" onClick={() => updateServers()} isDisabled={isLoading}>
+                        <motion.div
+                            variants={refreshAnims}
+                            animate={isLoading ? 'rotate' : 'stop'}
+                        >
+                            <FontAwesomeIcon icon={faArrowsRotate} size="lg"/>
+                        </motion.div>
+                    </Button>
                 </Tooltip>
             </div>
         </div>
