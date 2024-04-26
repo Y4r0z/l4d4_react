@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEye } from "@fortawesome/free-solid-svg-icons";
 import { faTwitch } from "@fortawesome/free-brands-svg-icons";
 import "./styles.css"
+import { TwitchStream } from "@/components/types";
 
-export default async function TwitchStreams()
+export default async function TwitchStreams({streams} : {streams:TwitchStream[] | null})
 {
-    const streams = await getTwitchStreams();
     return(
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {streams && streams.map((s) => (

@@ -18,13 +18,16 @@ import {
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { GlobalConfig } from "@/app/app.config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-export function NavLink({href, text, className = '', onclick=null} : {href: string, text: string, className? : string, onclick?:any})
+export function NavLink({href, text, className = '', onclick=null, border=true} : {href: string, text: string, className? : string, onclick?:any, border?:boolean})
 {
     const pathname = usePathname();
+    const borderStyle = border ? "border-b-0 transition-[border-width] hover:border-b-3 border-oaccent" : "";
     return(
         <NavbarItem onClick={onclick}>
-            <Link href={href} className={className + " font-bold border-b-0 transition-[border-width] hover:border-b-3 border-oaccent" + ` ${pathname === href ? 'text-red-500' : 'text-text-900'}`}>{text}</Link>
+            <Link href={href} className={className + " font-bold" + ` ${pathname === href ? 'text-red-500' : 'text-text-900'} ${borderStyle}`}>{text}</Link>
         </NavbarItem>
     )
 }
@@ -63,11 +66,13 @@ export default function Header()
                 <Dropdown showArrow={true}>
                     <NavbarItem>
                         <DropdownTrigger>
-                            <Button disableRipple className="p-0 bg-transparent text-xl font-bold text-text-900">Прочее</Button>
+                            <Button disableRipple className="p-0 bg-transparent text-xl font-bold text-text-900">
+                                Прочее<FontAwesomeIcon icon={faChevronDown} size="2xs" className="ml-[-0.25rem]"/>
+                            </Button>
                         </DropdownTrigger>
                     </NavbarItem>
                     <DropdownMenu>
-                        {dropdownItems.map((i) => (<DropdownItem key={i.href}><NavLink className="text-xl" href={i.href} text={i.text}/></DropdownItem>))}
+                        {dropdownItems.map((i) => (<DropdownItem key={i.href} className="p-0"><NavLink className="text-xl flex p-2" href={i.href} text={i.text} border={false}/></DropdownItem>))}
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>

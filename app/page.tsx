@@ -1,5 +1,5 @@
 'use server'
-import { getOnlineDay, getServerById, getServers, getTopPlayers} from "@/components/api"
+import { getOnlineDay, getServerById, getServers, getTopPlayers, getTwitchStreams} from "@/components/api"
 import ServersList from "@/components/ServersList/ServersList";
 import ImageCarousel from "@/components/HomePage/ImageCarousel/ImageCarousel";
 import DayStats from "@/components/HomePage/DayStats/DayStats";
@@ -12,6 +12,7 @@ export default async function Home() {
   const servers = await getServers();
   const players = await getTopPlayers(0, 12);
   const dayOnline = await getOnlineDay() ?? 0;
+  const streams = await getTwitchStreams();
 
   const getCookieNum = (name : string, def : number) => {
     return cookies().get(name)?.value ? Number(cookies().get(name)?.value) : 0
@@ -44,10 +45,16 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-background-100 rounded-xl p-4">
-        <h1 className="text-3xl mt-2 mb-4">Трансляции</h1>
-        <div><TwitchStreams/></div>
-      </div>
+      {
+        (streams != undefined && streams?.length > 0) ? 
+        <div className="bg-background-100 rounded-xl p-4">
+          <h1 className="text-3xl mt-2 mb-4">Трансляции</h1>
+          <div><TwitchStreams streams={streams}/></div>
+        </div>
+        :
+        <></>
+      }
+      
     </main>
   );
 }

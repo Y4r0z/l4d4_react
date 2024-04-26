@@ -9,6 +9,7 @@ import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import PlayersTop from "./PlayersTop";
 import { searchPlayer } from "../api";
 import { Divider } from "@nextui-org/divider";
+import { Tooltip } from "@nextui-org/react";
 export default function PlayersTopWithSearch({playersList} : {playersList : TopPlayer[] | null})
 {
     const [players, setPlayers] = useState(playersList);
@@ -17,6 +18,7 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
     const [value, setValue] = useState("");
 
     const startPlayerSearch = async () =>{
+        if(value.length == 0) setSearchMode(false)
         if(value.length < 2) return;
         setSearchMode(true);
         setLoading(true);
@@ -56,13 +58,28 @@ export default function PlayersTopWithSearch({playersList} : {playersList : TopP
                         }}
                     />
                     <div className="overflow-hidden rounded-r-xl flex flex-row items-center h-14 bg-[#3F3F46] w-32 justify-between">
-                    <Button className="rounded-none w-14 h-14" isIconOnly onClick={async () => {setSearchMode(false); setValue("");}}>
-                        <FontAwesomeIcon icon={faXmark} size="xl"/>
-                    </Button>
+                    <Tooltip content="Очистить" closeDelay={200}>    
+                        <Button
+                            className="rounded-none w-14 h-14"
+                            isIconOnly
+                            onClick={async () => {setSearchMode(false); setValue("");}}
+                            isDisabled={value.length == 0}
+                        >
+                            <FontAwesomeIcon icon={faXmark} size="xl"/>
+                        </Button>
+                    </Tooltip>
                     <Divider orientation="vertical" className="h-9"/>
-                    <Button className="rounded-none w-14 h-14" isIconOnly isLoading={loading} onClick={async () => await startPlayerSearch()}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} size="xl"/>
-                    </Button>
+                    <Tooltip content="Найти игрока" closeDelay={200}>
+                        <Button
+                            className="rounded-none w-14 h-14"
+                            isIconOnly
+                            isLoading={loading}
+                            onClick={async () => await startPlayerSearch()}
+                            isDisabled={value.length < 2}
+                        >
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="xl"/>
+                        </Button>
+                    </Tooltip>
                     </div>
                 </div>
                 {getTopControl()}
