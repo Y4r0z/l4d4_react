@@ -20,6 +20,8 @@ import { useState } from "react";
 import { GlobalConfig } from "@/app/app.config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import ProfileWidget from "./ProfileWidget/ProfileWidget";
+
 
 export function NavLink({href, text, className = '', onclick=null, border=true} : {href: string, text: string, className? : string, onclick?:any, border?:boolean})
 {
@@ -49,7 +51,7 @@ export default function Header()
 
     return(
         <Navbar 
-            maxWidth="xl"
+            maxWidth="2xl"
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
             className="bg-background-100" 
@@ -61,7 +63,7 @@ export default function Header()
                 </Link>
             </NavbarBrand>
 
-            <NavbarContent justify="end" className="hidden md:flex">
+            <NavbarContent justify="center" className="hidden md:flex">
                 {menuItems.map((i) => (<NavLink key={i.href} className="text-xl" href={i.href} text={i.text}/>))}
                 <Dropdown showArrow={true}>
                     <NavbarItem>
@@ -77,8 +79,11 @@ export default function Header()
                 </Dropdown>
             </NavbarContent>
 
-            <NavbarContent className="flex md:hidden" justify="end">
-                <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+            <NavbarContent justify="end">
+                <NavbarItem>
+                    <ProfileWidget/>
+                </NavbarItem>
+                <NavbarMenuToggle className="flex md:hidden" aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
             </NavbarContent>
 
             <NavbarMenu className="flex items-center space-y-4">

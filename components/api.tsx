@@ -2,6 +2,7 @@
 import { GlobalConfig } from "@/app/app.config";
 import { 
     Privileges,
+    FullPrivileges,
     Server,  
     SteamGroupStats,
     SteamInfo,
@@ -74,7 +75,7 @@ export const getDonatePlayers = async () => await myFetch<DonatePlayer[]>('v1/do
 export const searchPlayer = async (search : string) => await myFetch<SteamPlayer[]>(`v1/nickname/${search}`);
 
 
-export const PrivilegeToString = (p : Privileges) => {
+export const PrivilegeToString : (p:Privileges) => FullPrivileges = (p : Privileges) => {
     switch(p)
     {
         case 'o': return "VIP";

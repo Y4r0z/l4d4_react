@@ -9,7 +9,8 @@ export const GlobalConfig = {
     bans: "https://ban.l4d2perks.ru/",
     wiki: "https://wiki.l4d2perks.ru/ru/home",
     api: "https://l4d2perks.ru/api",
-    api2: "https://api2.l4d2perks.ru"
+    api2: "https://api2.l4d2perks.ru",
+    localURL: "http://localhost:3000"
 }
 
 export const DependsOn = (variable, element ) =>{

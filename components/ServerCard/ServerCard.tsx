@@ -110,7 +110,7 @@ export default function ServerCard(
         const ftime = [
             s >= 3600 ? `${Math.floor(s/3600)} ч, ` : null,
             s >= 60 ? `${Math.floor((s%3600)/60)} мин, ` : null,
-            `${(s%60).toFixed(0)} сек`]
+            s < 3600 ? `${(s%60).toFixed(0)} сек` : null]
         return <tr key={player.name}><td>{player.name}</td><td>{ftime.join('')}</td></tr>
     }
 

@@ -23,7 +23,6 @@ export default async function Home() {
     hideMode : getCookieNum("servers_hideMode", 0),
   }
 
-  
   return (
     <main className="flex flex-col py-4 md:py-12 px-0 md:px-8 lg:px-24 xl:px-48 gap-8">
       <div className="flex flex-col md:flex-row justify-between gap-4">

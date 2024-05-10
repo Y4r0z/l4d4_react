@@ -1,0 +1,261 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Endurance_Challenges {
+  STEAM_ID                 String @unique(map: "Steam_ID_UNIQUE") @db.VarChar(64)
+  SerializedChallengesInfo Json
+}
+
+model Endurance_GunShop {
+  preset_id                      Int                              @id @default(autoincrement())
+  STEAM_ID                       String                           @db.VarChar(64)
+  name                           String                           @db.VarChar(255)
+  positions                      Int
+  Endurance_GunShop_PresetWeapon Endurance_GunShop_PresetWeapon[]
+}
+
+model Endurance_GunShop_PresetWeapon {
+  id                Int               @id @default(autoincrement())
+  preset_id         Int
+  weapon            Json
+  Endurance_GunShop Endurance_GunShop @relation(fields: [preset_id], references: [preset_id], onDelete: Cascade, map: "Endurance_GunShop_PresetWeapon_ibfk_1")
+
+  @@index([preset_id], map: "preset_id")
+}
+
+model Endurance_PerksBuilds {
+  ID                     Int                    @id @default(autoincrement())
+  PresetID               Int
+  PerkID                 Int
+  Endurance_PerksList    Endurance_PerksList    @relation(fields: [PerkID], references: [ID], onDelete: Cascade, map: "Endurance_PerksBuilds_ibfk_1")
+  Endurance_PerksPresets Endurance_PerksPresets @relation(fields: [PresetID], references: [ID], onDelete: Cascade, map: "Endurance_PerksBuilds_ibfk_2")
+
+  @@index([PerkID], map: "PerkID")
+  @@index([PresetID], map: "PresetID")
+}
+
+model Endurance_PerksList {
+  ID                    Int                     @id @default(autoincrement())
+  TypeID                Int
+  Name                  String                  @unique(map: "Name") @db.VarChar(64)
+  Endurance_PerksBuilds Endurance_PerksBuilds[]
+  Endurance_PerksTypes  Endurance_PerksTypes    @relation(fields: [TypeID], references: [ID], onDelete: Cascade, map: "Endurance_PerksList_ibfk_1")
+
+  @@index([TypeID], map: "TypeID")
+}
+
+model Endurance_PerksPresets {
+  ID                    Int                     @id @default(autoincrement())
+  SteamID               String                  @db.VarChar(64)
+  Name                  String                  @db.VarChar(64)
+  CreationDate          DateTime                @default(now()) @db.DateTime(0)
+  IsDefault             Boolean                 @default(false)
+  Endurance_PerksBuilds Endurance_PerksBuilds[]
+}
+
+model Endurance_PerksTypes {
+  ID                  Int                   @id @default(autoincrement())
+  Name                String                @unique(map: "Name") @db.VarChar(64)
+  Endurance_PerksList Endurance_PerksList[]
+}
+
+model Endurance_Points {
+  steamID    String   @id @db.VarChar(64)
+  Points     Int      @default(0)
+  date_added DateTime @default(now()) @db.DateTime(0)
+
+  @@index([steamID], map: "steamID")
+}
+
+model Endurance_PointsBoosters {
+  ID             Int    @id @default(autoincrement())
+  steamID        String @db.VarChar(64)
+  PointsBooster  Float  @default(1) @db.Float
+  UnixTime_Begin BigInt
+  UnixTime_Until BigInt
+}
+
+model Endurance_Privileges {
+  STEAM_ID       String  @id @db.VarChar(64)
+  Nickname       String  @db.VarChar(255)
+  FLAGS          String  @db.VarChar(32)
+  UnixTime_Begin BigInt
+  UnixTime_Until BigInt
+  IsDeactivated  Boolean @default(false)
+}
+
+model Endurance_Promocodes {
+  ID                              Int                               @id @default(autoincrement())
+  Code                            String                            @unique(map: "Code") @db.VarChar(64)
+  ActivationCount                 Int                               @default(0)
+  MaxActivationCount              Int
+  ActiveUntil                     BigInt
+  Endurance_PromocodesActivations Endurance_PromocodesActivations[] @ignore
+  Endurance_PromocodesRewards     Endurance_PromocodesRewards[]     @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Endurance_PromocodesActivations {
+  STEAM_ID             String               @db.VarChar(64)
+  CodeID               Int
+  ActivationTime       BigInt
+  Endurance_Promocodes Endurance_Promocodes @relation(fields: [CodeID], references: [ID], onDelete: Cascade, map: "Endurance_PromocodesActivations_ibfk_1")
+
+  @@index([CodeID], map: "CodeID")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Endurance_PromocodesRewards {
+  CodeID               Int
+  RewardID             Int
+  RewardAmount         Int                  @default(1)
+  Endurance_Promocodes Endurance_Promocodes @relation(fields: [CodeID], references: [ID], onDelete: Cascade, map: "Endurance_PromocodesRewards_ibfk_1")
+  Endurance_Rewards    Endurance_Rewards    @relation(fields: [RewardID], references: [ID], onDelete: Cascade, map: "Endurance_PromocodesRewards_ibfk_2")
+
+  @@index([CodeID], map: "Endurance_PromocodesRewards_ibfk_1")
+  @@index([RewardID], map: "Endurance_PromocodesRewards_ibfk_2")
+  @@ignore
+}
+
+model Endurance_Rewards {
+  ID                          Int                           @id @default(autoincrement())
+  Item                        String                        @db.VarChar(128)
+  Description                 String?                       @db.VarChar(255)
+  Endurance_PromocodesRewards Endurance_PromocodesRewards[] @ignore
+}
+
+model Endurance_ScoreStatistics {
+  ID                   Int                  @id @default(autoincrement())
+  STEAM_ID             String               @db.VarChar(64)
+  Score                Int
+  ScoreType            Int
+  TimeStamp            DateTime             @default(now()) @db.Timestamp(0)
+  Endurance_ScoreTypes Endurance_ScoreTypes @relation(fields: [ScoreType], references: [ID], onDelete: Cascade, map: "Endurance_ScoreStatistics_ibfk_1")
+
+  @@index([ScoreType], map: "ScoreType")
+}
+
+model Endurance_ScoreTypes {
+  ID                        Int                         @id @default(autoincrement())
+  Description               String                      @db.VarChar(255)
+  Endurance_ScoreStatistics Endurance_ScoreStatistics[]
+}
+
+model Endurance_TransactionTypes {
+  ID                     Int                      @id @default(autoincrement())
+  Description            String                   @db.VarChar(255)
+  Endurance_Transactions Endurance_Transactions[]
+}
+
+model Endurance_Transactions {
+  ID                         Int                        @id @default(autoincrement())
+  STEAM_ID                   String                     @db.VarChar(64)
+  TransactionType            Int
+  Amount                     Int
+  TimeStamp                  DateTime                   @default(now()) @db.Timestamp(0)
+  TransactionInfo            String?                    @db.VarChar(255)
+  Endurance_TransactionTypes Endurance_TransactionTypes @relation(fields: [TransactionType], references: [ID], onDelete: Cascade, map: "Endurance_Transactions_ibfk_1")
+
+  @@index([TransactionType], map: "TransactionType")
+}
+
+model Perks_LastSequence {
+  steamID    String   @unique(map: "steamID") @db.VarChar(64)
+  TimeStamp  DateTime @default(now()) @db.DateTime(0)
+  Surv_Perk1 Int      @default(1) @db.TinyInt
+  Surv_Perk2 Int      @default(1) @db.TinyInt
+  Surv_Perk3 Int      @default(1) @db.TinyInt
+  Surv_Perk4 Int      @default(1) @db.TinyInt
+  Inf_Perk1  Int      @default(1) @db.TinyInt
+  Inf_Perk2  Int      @default(1) @db.TinyInt
+  Inf_Perk3  Int      @default(1) @db.TinyInt
+  Inf_Perk4  Int      @default(1) @db.TinyInt
+  Inf_Perk5  Int?     @default(1) @db.TinyInt
+  Inf_Perk6  Int      @default(1) @db.TinyInt
+  Inf_Perk7  Int      @default(1) @db.TinyInt
+}
+
+model Perks_Pick_Statistics {
+  Perk_Name  String @unique(map: "Perk_Name") @db.VarChar(64)
+  Pick_Count Int    @default(0)
+}
+
+model ScoreSystem {
+  STEAM_ID           String   @unique(map: "STEAM_ID") @db.VarChar(64)
+  TotalScore         BigInt   @default(0)
+  GameTime           BigInt   @default(0)
+  LastConnectionTime DateTime @default(now()) @db.DateTime(0)
+  Name               String   @db.VarChar(255)
+}
+
+model ScoreSystem_Admins {
+  STEAM_ID           String   @id @db.VarChar(64)
+  TotalScore         Int      @default(0)
+  GameTime           Int      @default(0)
+  LastConnectionTime DateTime @default(now()) @db.DateTime(0)
+  Name               String   @db.VarChar(255)
+}
+
+model ScoreSystem_All {
+  id                 Int      @id @default(autoincrement())
+  STEAM_ID           String   @db.VarChar(64)
+  TotalScore         BigInt   @default(0)
+  GameTime           BigInt   @default(0)
+  LastConnectionTime DateTime @default(now()) @db.DateTime(0)
+  Name               String   @db.VarChar(255)
+  Season             String   @db.VarChar(15)
+  rang               Int
+
+  @@index([STEAM_ID], map: "STEAM_ID")
+}
+
+model amd_phrases {
+  steamID        String @unique(map: "steamID") @db.VarChar(32)
+  welcome_phrase String @db.VarChar(128)
+}
+
+model legacy_event {
+  ID         Int     @id @default(autoincrement())
+  STEAM_ID   String  @unique(map: "STEAM_ID") @db.VarChar(64)
+  TotalScore BigInt  @default(0)
+  Name       String? @db.VarChar(255)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model lilac_detections {
+  name                String @db.VarChar(128)
+  steamid             String @db.VarChar(32)
+  ip                  String @db.VarChar(16)
+  cheat               String @db.VarChar(50)
+  timestamp           Int
+  detection           Int
+  pos1                Float  @db.Float
+  pos2                Float  @db.Float
+  pos3                Float  @db.Float
+  ang1                Float  @db.Float
+  ang2                Float  @db.Float
+  ang3                Float  @db.Float
+  map                 String @db.VarChar(128)
+  team                Int
+  weapon              String @db.VarChar(64)
+  data1               Float  @db.Float
+  data2               Float  @db.Float
+  latency_inc         Float  @db.Float
+  latency_out         Float  @db.Float
+  loss_inc            Float  @db.Float
+  loss_out            Float  @db.Float
+  choke_inc           Float  @db.Float
+  choke_out           Float  @db.Float
+  connection_ticktime Float  @db.Float
+  game_ticktime       Float  @db.Float
+  lilac_version       String @db.VarChar(20)
+
+  @@ignore
+}

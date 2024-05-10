@@ -6,6 +6,7 @@ import { Badge } from "@nextui-org/badge";
 import { User } from "@nextui-org/user";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
 import SeasonsList from "@/components/PlayerPage/SeasonsList";
+import Link from "next/link";
 
 
 export default async function PlayerPage({params} : {params : {steam_id : string}})
@@ -25,6 +26,8 @@ export default async function PlayerPage({params} : {params : {steam_id : string
     }
     }catch{return <div className="flex w-full justify-center p-64 text-3xl">Игрок не найден!</div>}
     data.oldSeasons.reverse();
+
+    console.log(data.playerInfo.Privileges);
     
     const secToDate = (seconds : number) =>{
         const hours = Math.floor(seconds / 3600);
@@ -46,16 +49,30 @@ export default async function PlayerPage({params} : {params : {steam_id : string
         return (score ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    // Если использовать серверную функцию, будет Hydration error
+    const PrivilegeToString2 : (p:Privileges) => string = (p : Privileges) => {
+        switch(p)
+        {
+            case 'o': return "VIP";
+            case 'p': return "Premium";
+            case 'q': return "Legend";
+            case 's': return "Legacy";
+            default: return "Player";
+        }
+    }
+
     return(
         <div className="m-16 p-8 flex items-center flex-col xl:flex-row justify-center space-y-4 space-x-8
             bg-background-200 rounded-3xl">
             <div className="flex flex-col items-center">
-                <p className="text-2xl m-2">{PrivilegeToString(data.playerInfo.Privileges)}</p>
-                <Avatar
-                    isBordered
-                    src={data.steamInfo.avatarfull}
-                    className="w-64 h-63"
-                />
+            <p className="text-2xl m-2">{PrivilegeToString2(data.playerInfo.Privileges)}</p>
+                <Link href={data.steamInfo.profileurl}>
+                    <Avatar
+                        isBordered
+                        src={data.steamInfo.avatarfull}
+                        className="w-64 h-64"
+                    />
+                </Link>
                 <div className="m-2">
                     <p className="text-3xl">{data.steamInfo.personaname}</p>
                     <p className="text-lg text-neutral-400">{steam_id}</p>

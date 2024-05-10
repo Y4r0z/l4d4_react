@@ -1,4 +1,5 @@
-export type Privileges = 'o' | 'p' | 'q' | 's' | '' | null
+export type Privileges = 'o' | 'p' | 'q' | 's' | '' | null;
+export type FullPrivileges = 'VIP' | 'Premium' | 'Legend' | 'Legacy' | 'Player';
 
 export type SteamGroupStats = {
     members : string,
