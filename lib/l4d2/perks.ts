@@ -7,6 +7,10 @@ export enum SurvivorWeaponPerk{
     MacedonianStyle,
     __LENGTH
 }
+export const NameSurvivorWeaponPerk =[
+    "Неизвестный перк", "Неостановимый", "Двойное нажатие", "Отчаянный бросок",
+    "Барахольщик", "Светошумовая граната", "По-македонски"
+]
 
 export enum SurvivorMainPerk{
     Unbreakable = 1,
@@ -17,6 +21,10 @@ export enum SurvivorMainPerk{
     AirStrike,
     __LENGTH
 }
+export const NameSurvivorMainPerk = [
+    "Неизвестный перк", "Несокружимый", "Решающий удар", "Спринтер",
+    "Адреналин", "Отпор", "Авиаудар"
+]
 
 export enum SurvivorAddonPerk{
     Tenacity = 1,
@@ -27,6 +35,10 @@ export enum SurvivorAddonPerk{
     Counterforce,
     __LENGTH
 }
+export const NameSurvivorAddonPerk = [
+    "Неизвестный перк", "Выдержка", "Внутренняя сила", "Железная воля",
+    "Последний рывок", "Шестое чувство", "Противодействие"
+]
 
 export enum SurvivorTeamPerk{
     Empathy = 1,
@@ -37,16 +49,23 @@ export enum SurvivorTeamPerk{
     TogetherToTheEnd,
     __LENGTH
 }
-
+export const NameSurvivorTeamPerk = [
+    "Неизвестный перк", "Эмпатия", "Лидер", "Одолженное время",
+    "Ради людей", "Одинокий волк", "Вместе до конца"
+]
 
 
 export enum BoomberPerk{
     DeadWreckening = 1,
     MotionSickness,
     DragonBreath,
-    Apray,
+    Spray,
     __LENGTH
 }
+export const NameBoomerPerk = [
+    "Неизвестный перк", "Гнев толпы", "Подвижность", "Дыхание дракона",
+    "Спрей"
+]
 
 export enum TankPerk{
     Supression = 1,
@@ -57,6 +76,10 @@ export enum TankPerk{
     Regeneration,
     __LENGTH
 }
+export const NameTankPerk = [
+    "Неизвестный перк", "Подавление", "Единство", "Голиаф",
+    "Ненависть", "Бомбардир", "Регенерация"
+]
 
 export enum SmokerPerk{
     TongueTwister = 1,
@@ -65,6 +88,10 @@ export enum SmokerPerk{
     GasLeak,
     __LENGTH
 }
+export const NameSmokerPerk = [
+    "Неизвестный перк", "Рыбак", "Тяни - Бросай", "Тащи его",
+    "Утечка газа"
+]
 
 export enum HunterPerk{
     BodySlam = 1,
@@ -74,6 +101,10 @@ export enum HunterPerk{
     IronGrasp,
     __LENGTH
 }
+export const NameHunterPerk = [
+    "Неизвестный перк", "Бросок зверя", "Искусный хищник", "Демон скорости",
+    "Смертельное ранение", "Железная хватка"
+]
 
 export enum JockeyPerk{
     Counterattack = 1,
@@ -83,6 +114,10 @@ export enum JockeyPerk{
     Acrobat,
     __LENGTH
 }
+export const NameJockeyPerk = [
+    "Неизвестный перк", "Контратака", "Попрыгунчик", "Стелс",
+    "Воришка", "Акробат"
+]
 
 export enum SpitterPerk{
     Spitbomb = 1,
@@ -91,6 +126,10 @@ export enum SpitterPerk{
     CarpetBombing,
     __LENGTH
 }
+export const NameSpitterPerk = [
+    "Неизвестный перк", "Кислотная бомба", "Суперклей", "Помни меня",
+    "Ковровая босбардировка"
+]
 
 export enum ChargerPerk{
     ScatteringRam = 1,
@@ -99,6 +138,10 @@ export enum ChargerPerk{
     HeadOn,
     __LENGTH
 }
+export const NameChargerPerk = [
+    "Неизвестный перк", "Таран", "Рулевой", "Перезаряд",
+    "Напролом"
+]
 
 export type PerkPick = [
     weaponPerk : SurvivorWeaponPerk,

@@ -11,6 +11,7 @@ export async function GET() {
     return NextResponse.json(pick);
 }
 
+// perks=1,1,1,1,1,1,1,1,1,1,1
 export async function POST(request : NextRequest) {
     const steam_id = await getSteamID();
     if(steam_id === null) return Unauthorized();
