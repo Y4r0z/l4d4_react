@@ -128,7 +128,7 @@ export enum SpitterPerk{
 }
 export const NameSpitterPerk = [
     "Неизвестный перк", "Кислотная бомба", "Суперклей", "Помни меня",
-    "Ковровая босбардировка"
+    "Ковровая бомбардировка"
 ]
 
 export enum ChargerPerk{

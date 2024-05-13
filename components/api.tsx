@@ -60,7 +60,7 @@ export const getPlayerInfo = async (steam_id : string) => await myFetch<PlayerIn
 
 export const getSteam = async (steam_id : string) => await myFetch<SteamInfo>(`v1/get_steam/${steam_id}`);
 
-export const getAdmins = async () => await myFetch<string[]>('v1/admins_players', {next:{revalidate: 3600}});
+export const getAdmins = async () => (await myFetch<string[]>('v1/admins_players', {next:{revalidate: 3600}}))?.map(x => x.replace("STEAM_0", "STEAM_1"));
 
 export const getAllTimeScore = async (steam_id : string) => await myFetch<AllTimeScore[]>(`v1/alltimescore/${steam_id}`);
 
