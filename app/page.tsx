@@ -8,6 +8,11 @@ import TwitchStreams from "@/components/HomePage/TwitchStreams/TwitchStreams";
 
 import { cookies } from "next/headers";
 
+
+/*
+  TODO: Offline status for servers
+*/
+
 export default async function Home() {
   const servers = await getServers();
   const players = await getTopPlayers(0, 12);
@@ -33,9 +38,9 @@ export default async function Home() {
           <div className="p-4 rounded-xl bg-background-100 text-lg">Онлайн за сутки: {dayOnline.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
           <div className="p-4 rounded-xl bg-background-100 md:p-0"><ImageCarousel/></div>
           <div className="bg-background-100 rounded-xl"><DayStats/></div>
-          <div className="p-2 rounded-xl md:p-0 min-w-[12rem] 2xl:min-w-[24rem] max-h-[32rem] overflow-hidden">
+          <div className="p-2 rounded-xl md:p-0 min-w-[12rem] 2xl:min-w-[24rem] max-h-[32rem]">
             <PlayersTop 
-              className="max-h-[26rem]"
+              className="max-h-[26rem] overflow-hidden" 
               players={players} 
               loadCount={12} 
               pagination={true} 

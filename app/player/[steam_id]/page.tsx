@@ -2,18 +2,51 @@
 import { getSteam, getPlayerInfo, getOldSeasons, getAchievement, getAllTimeScore, PrivilegeToString, PrivilegeToBorder, PrivilegeToBackground } from "@/components/api";
 import {Privileges } from "@/components/types";
 import { Avatar } from "@nextui-org/avatar";
-import { Badge } from "@nextui-org/badge";
-import { User } from "@nextui-org/user";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
 import SeasonsList from "@/components/PlayerPage/SeasonsList";
 import Link from "next/link";
+import SeasonsTimePieChart from "@/components/Charts/SeasonsTimePieChart";
+import SeasonsPointsPieChart from "@/components/Charts/SeasonsPointsPieChart";
+
+const secToDate = (seconds : number) =>{
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    if (hours == 0) return `${minutes} мин.`;
+    return `${hours} ч., ${minutes} мин.`;
+}
+const strToDate = (s : string) =>{
+    const a = s.split('.'); //d m y
+    return Date.parse(`${a[1]} ${a[0]} ${a[2]}`);
+};
+
+const formatTime = (dateTimeString : string) => {
+    const now = new Date();
+    const t = new Date(dateTimeString);
+    if (now.toDateString() == t.toDateString()) return 'Сегодня';
+    if (Math.floor((now.getTime() - t.getTime()) / (1000 * 60 * 60 * 24)) == 1) return 'Вчера';
+    return t.toLocaleDateString('ru-RU', {year:'numeric', month:'2-digit', day:'2-digit'});
+}
+
+const formatScore = (score : number | string) =>
+{
+    return (score ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Если использовать серверную функцию, будет Hydration error
+const PrivilegeToString2 : (p:Privileges) => string = (p : Privileges) => {
+    switch(p)
+    {
+        case 'o': return "VIP";
+        case 'p': return "Premium";
+        case 'q': return "Legend";
+        case 's': return "Legacy";
+        default: return "Player";
+    }
+}
 
 
 export default async function PlayerPage({params} : {params : {steam_id : string}})
 {
     const steam_id = decodeURIComponent(params.steam_id);
-    
-
     const throwErr = () => {throw new Error("Найден null")};
     let data;
     try{
@@ -25,41 +58,9 @@ export default async function PlayerPage({params} : {params : {steam_id : string
         allTimeScore : await getAllTimeScore(steam_id) ?? throwErr()
     }
     }catch{return <div className="flex w-full justify-center p-64 text-3xl">Игрок не найден!</div>}
-    data.oldSeasons.reverse();
+    data.oldSeasons.sort((a,b) => strToDate(b.Season) - strToDate(a.Season));
 
-    console.log(data.playerInfo.Privileges);
-    
-    const secToDate = (seconds : number) =>{
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        if (hours == 0) return `${minutes} мин.`;
-        return `${hours} ч., ${minutes} мин.`;
-    }
-    
-    const formatTime = (dateTimeString : string) => {
-        const now = new Date();
-        const t = new Date(dateTimeString);
-        if (now.toDateString() == t.toDateString()) return 'Сегодня';
-        if (Math.floor((now.getTime() - t.getTime()) / (1000 * 60 * 60 * 24)) == 1) return 'Вчера';
-        return t.toLocaleDateString('ru-RU', {year:'numeric', month:'2-digit', day:'2-digit'});
-    }
-
-    const formatScore = (score : number | string) =>
-    {
-        return (score ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    // Если использовать серверную функцию, будет Hydration error
-    const PrivilegeToString2 : (p:Privileges) => string = (p : Privileges) => {
-        switch(p)
-        {
-            case 'o': return "VIP";
-            case 'p': return "Premium";
-            case 'q': return "Legend";
-            case 's': return "Legacy";
-            default: return "Player";
-        }
-    }
+    console.log(await (await fetch('https://l4d2perks.ru/api/v1/oldseason/STEAM_1:0:63217597')).json());
 
     return(
         <div className="m-16 p-8 flex items-center flex-col xl:flex-row justify-center space-y-4 space-x-8
@@ -97,6 +98,12 @@ export default async function PlayerPage({params} : {params : {steam_id : string
             </div>
             <div className="p-4">
                 {data.oldSeasons.length > 0 && <SeasonsList seasons={data.oldSeasons}/>}
+            </div>
+            <div className="p-4"> 
+                <SeasonsTimePieChart seasons={data.oldSeasons}/>
+            </div>
+            <div className="p-4"> 
+                <SeasonsPointsPieChart seasons={data.oldSeasons}/>
             </div>
         </div>
     );

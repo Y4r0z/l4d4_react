@@ -63,7 +63,8 @@ export type Server = {
     maxplayers : number,
     players : Player[],
     connect : string,
-    timestamp : string
+    timestamp : string,
+    isOffline? : boolean
 }
 export type AllTimeScore = {
     totalScoreSum : number,

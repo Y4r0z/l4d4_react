@@ -138,17 +138,19 @@ export default function ServerCard(
                 }}
             >
                 <Card className="card-main rounded-none h-full">
-                    <CardHeader className="absolute z-10 top-0 flex-col !items-start">
+                    <CardHeader
+                        className={"absolute z-10 top-0 flex-col !items-start"}
+                    >
                         <Skeleton isLoaded={isLoaded}>
                             <motion.h1 
                                 initial={false}
-                                className="font-futurot text-otext text-xl"
+                                className={"font-futurot text-xl " + (server?.isOffline === true ? "text-text-600" : "text-otext")}
                                 animate={{
                                     fontSize: size == 'lg' ? '1.5rem' : '1.25rem',
                                     lineHeight: size == 'lg' ? '2rem' : '1.75rem'
                                 }}
                             >
-                                {name}
+                                {name  + (server?.isOffline === true ? " - Offline" : "")}
                             </motion.h1>
                         </Skeleton>
                     </CardHeader>

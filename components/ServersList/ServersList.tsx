@@ -100,12 +100,12 @@ export default function ServersList
                     </Tooltip>
                 </ButtonGroup>
                 <ButtonGroup>
-                    <Tooltip content="Показать пустные сервера">
+                    <Tooltip content="Показать пустые сервера">
                         <Button key={0} className={listBtnStyle(0, hideMode)} onClick={() => setHideMode(0)}>
                             <FontAwesomeIcon icon={faEye} size="lg"/>
                             </Button>
                     </Tooltip>
-                    <Tooltip content="Скрыть пустные сервера">
+                    <Tooltip content="Скрыть пустые сервера">
                         <Button key={1} className={listBtnStyle(1, hideMode)} onClick={() => setHideMode(1)}>
                             <FontAwesomeIcon icon={faEyeSlash} size="lg"/>
                             </Button>

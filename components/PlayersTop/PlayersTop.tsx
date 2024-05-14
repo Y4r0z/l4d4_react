@@ -17,7 +17,7 @@ export default function PlayersTop(
         showTime = true,
         pagination = true,
         textProps = "text-xl",
-        className = "max-h-[92vh] md:max-h-[85vh]"
+        className = "max-h-[92vh] md:max-h-[85vh] overflow-hidden"
     }
     : 
     {

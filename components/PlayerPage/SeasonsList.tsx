@@ -1,6 +1,7 @@
 'use client'
 import { Season } from "../types";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+
 export default function SeasonsList({seasons} : {seasons : Season[]})
 {
     const secToDate = (seconds : number) =>{
@@ -18,24 +19,24 @@ export default function SeasonsList({seasons} : {seasons : Season[]})
 
     return(
         <Table aria-label="Таблица сезонов" isHeaderSticky className="overflow-scroll h-[21rem]">
-                        <TableHeader>
-                            <TableColumn>Сезон</TableColumn>
-                            <TableColumn>Ранг</TableColumn>
-                            <TableColumn>Поинты</TableColumn>
-                            <TableColumn>Время</TableColumn>
-                        </TableHeader>
-                        <TableBody items={seasons}>
-                        {
-                        (s) => (
-                            <TableRow key={s.Season}>
-                                <TableCell className="tabular-nums">{parseDate(s.Season)}</TableCell>
-                                <TableCell className="tabular-nums">{s.rang}</TableCell>
-                                <TableCell className="tabular-nums">{s.TotalScore}</TableCell>
-                                <TableCell className="tabular-nums">{secToDate(s.GameTime)}</TableCell>
-                            </TableRow>
-                        )
-                        }
-                        </TableBody>
-                    </Table>
+                <TableHeader>
+                    <TableColumn>Сезон</TableColumn>
+                    <TableColumn>Ранг</TableColumn>
+                    <TableColumn>Поинты</TableColumn>
+                    <TableColumn>Время</TableColumn>
+                </TableHeader>
+                <TableBody items={seasons}>
+                {
+                (s) => (
+                    <TableRow key={s.Season}>
+                        <TableCell className="tabular-nums">{parseDate(s.Season)}</TableCell>
+                        <TableCell className="tabular-nums">{s.rang}</TableCell>
+                        <TableCell className="tabular-nums">{s.TotalScore}</TableCell>
+                        <TableCell className="tabular-nums">{secToDate(s.GameTime)}</TableCell>
+                    </TableRow>
+                )
+                }
+                </TableBody>
+            </Table>
     )
 }

@@ -15,7 +15,7 @@ export default async function TwitchStreams({streams} : {streams:TwitchStream[] 
                 <Card key={s.id + s.streamLink}>
                     <CardBody className="stream-body">
                         <a href={s.streamLink} className="relative">
-                        <div className="absolute top-1 left-1 rounded-xl bg-red-500 py-1 px-2">LIVE</div>
+                        <div className="absolute top-1 left-1 rounded-lg bg-red-500 py-1 px-2 font-bold">LIVE</div>
                         <div className="absolute flex items-center justify-center left-1/2 right-1/2 top-1/2 bottom-1/2 stream-icon">
                             <FontAwesomeIcon icon={faTwitch} size="6x"/>
                         </div>

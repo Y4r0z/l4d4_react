@@ -27,6 +27,7 @@ export async function myFetch<Type>(href : string, settings : any = {})
         const response = await fetch(`${apiBase}/${href}`, settings);
         if(!response.ok) throw new Error("Api недоступен!");
         const data : Type = await response.json();
+        //console.log(`${apiBase}/${href}`, data)
         return data;
     } catch(e) {
         console.error(`Ошибка в "${href}": ${e}`);
@@ -41,11 +42,17 @@ export async function getServers()
     let data = await myFetch<Server[]>('v1/server/0', {next:{revalidate: 15}});
     if(data == null) return null; 
     data = data.filter(s => (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24);
+    data.forEach(s => s.isOffline = (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 > 0.5)
     data.sort((a, b) => b.players.length - a.players.length);
+    data.sort((a,b ) => (a.isOffline && !b.isOffline) ? 1 : -1);
     return data;
 }
 
-export const getServerById = async (id : number) => await myFetch<Server>(`v1/server/${id}`);
+export const getServerById = async (id : number) => {
+    const s = await myFetch<Server>(`v1/server/${id}`);
+    if(s) s.isOffline = (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 > 0.5;
+    return s;
+};
 
 export const getOnlineDay = async () => await myFetch<number>(`v1/online_day`);
 
