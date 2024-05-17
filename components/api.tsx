@@ -43,8 +43,8 @@ export async function getServers()
     if(data == null) return null; 
     data = data.filter(s => (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24);
     data.forEach(s => s.isOffline = (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 > 0.5)
-    data.sort((a, b) => b.players.length - a.players.length);
     data.sort((a,b ) => (a.isOffline && !b.isOffline) ? 1 : -1);
+    data.sort((a, b) => b.players.length - a.players.length);
     return data;
 }
 

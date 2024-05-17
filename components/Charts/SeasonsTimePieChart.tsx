@@ -29,12 +29,12 @@ export default function SeasonsTimePieChart({seasons} : {seasons : Season[]})
     var colors = generateColors(data.length);
     colors = colors.filter((el, i, a) => i%2==0).concat(colors.filter((el, i, a) => i%2==1))
 
-    const dataset_time = data.map((x) => x.GameTime);
+    const dataset_time = data.map((x) => x.GameTime / 60 / 60);
     const dataset_labels = data.map(x => `Сезон: ${parseDate(x.Season)}`);
     const dataset = {
         labels: dataset_labels,
         datasets:[{
-            label:"Время в игре",
+            label:"Часов в игре",
             data: dataset_time,
             backgroundColor: colors,
             borderWidth: 2,
