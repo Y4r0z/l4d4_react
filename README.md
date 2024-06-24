@@ -1,5 +1,18 @@
 # Фронтенд для серверов ENDURANCE
 
+## Демонстрация
+### Дескотпная версия
+![alt text](demo/main_servers.png)
+![alt text](demo/top.png)
+### Мобильная версия
+<p float="left">
+  <img src="demo/mobile/main_servers.png" width="300" />
+  <img src="demo/mobile/main_banner_stasts.png" width="300" /> 
+  <img src="demo/mobile/main_top.png" width="300" />
+  <img src="demo/mobile/boosters.png" width="300" />
+  <img src="demo/mobile/top_old.png" width="300" />
+</p>
+
 ## С чего начать вносить изменения?
 
 ### Запуск
