@@ -1,0 +1,8 @@
+
+/* Custom Scroll Bar */
+
+/* Works on Firefox */
+.my-table {
+    scrollbar-width: thin !important;
+  }
+  

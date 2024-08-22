@@ -22,30 +22,30 @@ export default async function DayStats()
                     placement="right" 
                     size="lg" 
                     closeDelay={200} 
-                    offset={-290 + (data.members.length > 3 ? 20 : 0)} 
+                    offset={-290 + (data.membersCount.length > 3 ? 20 : 0)} 
                     className="bg-background-200"
                 >
-                    <div><span className="circle pulse-black"/> {data.members}</div>
+                    <div><span className="circle pulse-black"/> {data.membersCount}</div>
                 </Tooltip> 
                 <Tooltip 
                     content="Игроков онлайн" 
                     placement="right" 
                     size="lg" 
                     closeDelay={200} 
-                    offset={-290 + (data.online.length > 3 ? 20 : 0)} 
+                    offset={-290 + (data.membersOnline.length > 3 ? 20 : 0)} 
                     className="bg-background-200"
                 >
-                    <div><span className="circle pulse-blue"/> {data.online}</div>
+                    <div><span className="circle pulse-blue"/> {data.membersOnline}</div>
                 </Tooltip> 
                 <Tooltip 
                     content="Игроков в игре" 
                     placement="right" 
                     size="lg" 
                     closeDelay={200} 
-                    offset={-290 + (data.inGame.length > 3 ? 20 : 0)} 
+                    offset={-290 + (data.membersInGame.length > 3 ? 20 : 0)} 
                     className="bg-background-200"
                 >
-                    <div><span className="circle pulse-green"/> {data.inGame}</div>
+                    <div><span className="circle pulse-green"/> {data.membersInGame}</div>
                 </Tooltip> 
             </div>
         </div>

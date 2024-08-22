@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableRow, TableColumn, TableHeader, Spinne
 import { useEffect, useState } from "react";
 import { useAsyncList } from "react-stately";
 import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
-
+import './styles.css'
 
 
 export default function PlayersTop(
@@ -68,8 +68,9 @@ export default function PlayersTop(
         return `${hours} ч., ${minutes} мин.`;
     } ;
     const isPlayerOnline = (p : TopPlayer) => {
-        const date = new Date(p.LastConnectionTime).getTime();
-        return ((new Date()).getTime() - date) < 30 * 60 * 1000;
+        //const date = new Date(p.LastConnectionTime).getTime();
+        //return ((new Date()).getTime() - date) < 30 * 60 * 1000;
+        return false;
     };
 
     const getColumns = () => {
@@ -80,21 +81,23 @@ export default function PlayersTop(
     }
     const getRowCells = (p : TopPlayer) => {
         const cells = [
-            <TableCell key={1} className="flex flex-row items-center gap-4 max-w-[10rem] md:max-w-80">
+            <TableCell key={1} className="flex flex-row items-center gap-4 max-w-[10rem] md:max-w-[14rem]">
                 <Badge color="success" content=" " isInvisible={!isPlayerOnline(p)} placement="bottom-right" size="sm">
-                    <Avatar src={p.Avatar_url} name={p.Name} isBordered/>
+                    <Avatar src={p.steamInfo.avatarmedium} name={p.steamInfo.personaname} isBordered/>
                 </Badge>
-                <div className={textProps}>{p.Name}</div>
+                <div className={textProps}>{p.steamInfo.personaname}</div>
             </TableCell>
         ]
-        if(showPoints) cells.push(<TableCell key={2} className={textProps + (showTime ? "" : " text-right")}>{p.TotalScore.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>);
+        if(showPoints) cells.push(<TableCell key={2} className={textProps + (showTime ? "" : " text-right")}>{p.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>);
         if(showTime) cells.push(<TableCell key={3} className={textProps}>{secToDate(p.GameTime)}</TableCell>);                       
         return cells;
     }
+    //Record<"base" ｜ "table" ｜ "thead" ｜ "tbody" ｜ "tfoot" ｜ "emptyWrapper" 
+    //｜ "loadingWrapper" ｜ "wrapper" ｜ "tr" ｜ "th" ｜ "td" ｜ "sortIcon", string>
     return(
         <Table
             isHeaderSticky
-            className={`min-w-[14rem] overflow-y-scroll ${className}`}
+            className={`my-table min-w-[14rem] overflow-y-hidden ${className}`}
             aria-label="Топ игроков"
             baseRef={pagination ? scrollRef : null}
             bottomContent={
@@ -104,6 +107,9 @@ export default function PlayersTop(
                     </div>
                 ) : null
             }
+            classNames={{
+                'wrapper': 'my-table overflow-x-hidden p-4'
+            }}
         >
             <TableHeader>
                 {getColumns()}
@@ -115,7 +121,7 @@ export default function PlayersTop(
             >
             {
                 (p) => (
-                    <TableRow key={p.STEAM_ID + p.LastConnectionTime} className="hover:bg-gray-800 cursor-pointer" href={`/player/${p.STEAM_ID}`} target="_blank">
+                    <TableRow key={p.steamId} className="hover:bg-gray-800">
                         {getRowCells(p)}
                     </TableRow>
                 )

@@ -70,7 +70,7 @@ export default function ServerCard(
     
     useEffect(() => {
         if(server == null) return;
-        const open = openedMap.get(server.serverId);
+        const open = openedMap.get(server.id);
         animate(
           scope.current,
           {
@@ -93,8 +93,8 @@ export default function ServerCard(
     let mapRus = server == null ? "Неизвестная карта" : findChapterById(server.map).chapterName;
     let mapImage = server == null ? "/placeholder-image.jpg" : `/maps/${server.map.toLowerCase()}.jpg`
     let name = server == null ? `${GlobalConfig.sitename} Server` : server.name.replace('|', ' ');
-    let onlineStr = server == null ? "0/0" : `${server.players.length}/${server.maxplayers}`;
-    let onlineValue : number = server == null ? 0 : Math.round((server.players.length/server.maxplayers) * 100);
+    let onlineStr = server == null ? "0/0" : `${server.players.length}/${server.maxPlayersCount}`;
+    let onlineValue : number = server == null ? 0 : Math.round((server.players.length/server.maxPlayersCount) * 100);
     const chooseColor = (v : number) => {
         if(v < 50) return "bg-green-600";
         else if (v <= 75) return "bg-yellow-600";
@@ -102,11 +102,11 @@ export default function ServerCard(
     }
     let onlineColor = server == null ? "bg-purple-600" : chooseColor(onlineValue);
 
-    const copyConnect = () => {if (server != null) navigator.clipboard.writeText(server.connect)};
+    const copyConnect = () => {if (server != null) navigator.clipboard.writeText(`${server.ip}:${server.port}`)};
 
     function buildPlayer(player : Player){
-        if(player.raw.time === undefined) return <tr key={player.name}><td>Загружается...</td><td>0 сек</td></tr>
-        const s = player.raw.time;
+        if(player.time === undefined) return <tr key={player.name}><td>Загружается...</td><td>0 сек</td></tr>
+        const s = player.time;
         const ftime = [
             s >= 3600 ? `${Math.floor(s/3600)} ч, ` : null,
             s >= 60 ? `${Math.floor((s%3600)/60)} мин, ` : null,
@@ -130,8 +130,8 @@ export default function ServerCard(
                 initial={false}
                 onClick={() => {
                     if(server == null) return;
-                    const flag = !openedMap.get(server.serverId) && server.players.length > 0;
-                    openedActions.set(server.serverId, flag);
+                    const flag = !openedMap.get(server.id) && server.players.length > 0;
+                    openedActions.set(server.id, flag);
                 }} 
                 animate={{
                     height : size == "lg" ? '8rem' : '6rem'
@@ -197,7 +197,7 @@ export default function ServerCard(
                                 content="Подключиться"
                                 placement="left"
                                 closeDelay={200}>
-                                <Button as={Link} target="_blank" isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} href={`steam://connect/${server?.connect}`}>
+                                <Button as={Link} target="_blank" isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} href={`steam://connect/${server?.ip}:${server?.port}`}>
                                     <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
                                         <FontAwesomeIcon icon={faPlay}/>
                                     </motion.div>

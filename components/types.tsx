@@ -1,9 +1,9 @@
 export type Privileges = 'o' | 'p' | 'q' | 's' | '' | null
 
 export type SteamGroupStats = {
-    members : string,
-    inGame : string,
-    online: string
+    membersCount : string,
+    membersInGame : string,
+    membersOnline: string
 }
 export type SteamPlayer = {
     STEAM_ID : string,
@@ -14,12 +14,10 @@ export type SteamPlayer = {
     Avatar_url : string
 }
 export type TopPlayer = {
-    STEAM_ID : string,
-    TotalScore : number,
+    steamId : string,
+    score : number,
     GameTime : number,
-    LastConnectionTime : string,
-    Name : string,
-    Avatar_url : string
+    steamInfo: SteamInfo
 }
 
 export type PlayerInfo = {
@@ -47,22 +45,25 @@ export type SteamInfo = {
     personastateflags : number
 
 }
-export type PlayerRaw = {
-    score : number,
-    time : number
-}
 export type Player = {
+    id: number,
     name : string,
-    raw : PlayerRaw
+    ip: string,
+    steamId: string,
+    time: number
 }
 export type Server = {
-    serverId : number,
+    id : number,
     name : string,
-    map : string
-    maxplayers : number,
+    map : string,
+    playersCount : number,
+    maxPlayersCount : number,
     players : Player[],
-    connect : string,
-    timestamp : string
+    ip : string,
+    port: number,
+    ping : number,
+    keywords: string,
+    time : string
 }
 export type AllTimeScore = {
     totalScoreSum : number,

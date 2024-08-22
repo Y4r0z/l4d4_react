@@ -8,7 +8,7 @@ import {
     SteamPlayer,
     TopPlayer,
     PlayerInfo,
-    PlayerRaw, Player,
+    Player,
     AllTimeScore,
     Season,
     Achievement,
@@ -37,41 +37,54 @@ export async function myFetch<Type>(href : string, settings : any = {})
 
 export async function getServers()
 {
-    let data = await myFetch<Server[]>('v1/server/0', {next:{revalidate: 15}});
+    let data = await myFetch<Server[]>('info/server/all', {next:{revalidate: 15}});
     if(data == null) return null; 
-    data = data.filter(s => (Date.now() - Date.parse(s.timestamp)) / 1000 / 60 / 60 < 24);
+    data = data.filter(s => (Date.now() - Date.parse(s.time)) / 1000 / 60 / 60 < 24);
     data.sort((a, b) => b.players.length - a.players.length);
     return data;
 }
 
-export const getServerById = async (id : number) => await myFetch<Server>(`v1/server/${id}`);
+export const getServerById = async (id : number) => 
+    await myFetch<Server>(`v1/server/${id}`);
 
-export const getOnlineDay = async () => await myFetch<number>(`v1/online_day`);
+export const getOnlineDay = async () => 
+    0;//await myFetch<number>(`v1/online_day`);
 
-export const getSteamGroupStats = async () => await myFetch<SteamGroupStats>(`v1/steam_group`);
+export const getSteamGroupStats = async () => 
+    await myFetch<SteamGroupStats>(`info/group`);
 
 export const getTopPlayers = async (start : number | string, limit : number | string) => 
-    await myFetch<TopPlayer[]>(`v1/top_users/${start}/${limit}`, {next:{revalidate: 3600}});
+    await myFetch<TopPlayer[]>(`score/top?offset=${start}&limit=${limit}`, {next:{revalidate: 3600}});
 
-export const getOnlinePlayers = async () => await myFetch<TopPlayer[]>('v1/online_players');
+export const getOnlinePlayers = async () => 
+    [];//await myFetch<TopPlayer[]>('v1/online_players');
 
-export const getPlayerInfo = async (steam_id : string) => await myFetch<PlayerInfo>(`v1/player_info/${steam_id}`);
+export const getPlayerInfo = async (steam_id : string) => 
+    await myFetch<PlayerInfo>(`v1/player_info/${steam_id}`);
 
-export const getSteam = async (steam_id : string) => await myFetch<SteamInfo>(`v1/get_steam/${steam_id}`);
+export const getSteam = async (steam_id : string) => 
+    await myFetch<SteamInfo>(`v1/get_steam/${steam_id}`);
 
-export const getAdmins = async () => await myFetch<string[]>('v1/admins_players');
+export const getAdmins = async () => 
+    [];//await myFetch<string[]>('v1/admins_players');
 
-export const getAllTimeScore = async (steam_id : string) => await myFetch<AllTimeScore[]>(`v1/alltimescore/${steam_id}`);
+export const getAllTimeScore = async (steam_id : string) => 
+    [];//await myFetch<AllTimeScore[]>(`v1/alltimescore/${steam_id}`);
 
-export const getOldSeasons = async (steam_id : string) => await myFetch<Season[]>(`v1/oldseason/${steam_id}`);
+export const getOldSeasons = async (steam_id : string) => 
+    [];//await myFetch<Season[]>(`v1/oldseason/${steam_id}`);
 
-export const getAchievement = async (steam_id : string) => await myFetch<Achievement>(`v1/achievement/${steam_id}`);
+export const getAchievement = async (steam_id : string) => 
+    await myFetch<Achievement>(`v1/achievement/${steam_id}`);
 
-export const getTwitchStreams = async () => await myFetch<TwitchStream[]>('v1/streams/left4dead2');
+export const getTwitchStreams = async () => 
+    [];//await myFetch<TwitchStream[]>('v1/streams/left4dead2');
 
-export const getDonatePlayers = async () => await myFetch<DonatePlayer[]>('v1/donate_players');
+export const getDonatePlayers = async () => 
+    [];//await myFetch<DonatePlayer[]>('v1/donate_players');
 
-export const searchPlayer = async (search : string) => await myFetch<SteamPlayer[]>(`v1/nickname/${search}`);
+export const searchPlayer = async (search : string) => 
+    [];//await myFetch<SteamPlayer[]>(`v1/nickname/${search}`);
 
 
 export const PrivilegeToString = (p : Privileges) => {
