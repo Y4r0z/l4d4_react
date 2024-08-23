@@ -1,5 +1,4 @@
 'use client'
-import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from "next/image";
 import {getServerById } from "../api";
 import { Server, Player } from "../types";
@@ -183,9 +182,11 @@ export default function ServerCard(
                                     <span> 
                                         <PopoverTrigger>
                                                 <Button isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} onClick={copyConnect}>
-                                                    <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
-                                                        <FontAwesomeIcon icon={faCopy}/>
-                                                    </motion.div>
+                                                    <AnimatePresence initial={false}>
+                                                        <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
+                                                            <FontAwesomeIcon icon={faCopy}/>
+                                                        </motion.div>
+                                                    </AnimatePresence>
                                                 </Button>
                                         </PopoverTrigger>
                                     </span>
@@ -199,9 +200,11 @@ export default function ServerCard(
                                 placement="left"
                                 closeDelay={200}>
                                 <Button as={Link} target="_blank" isDisabled={!isLoaded} isIconOnly variant="flat" size={btnSize} href={`steam://connect/${server?.ip}:${server?.port}`}>
-                                    <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
-                                        <FontAwesomeIcon icon={faPlay}/>
-                                    </motion.div>
+                                    <AnimatePresence initial={false}>
+                                        <motion.div animate={{fontSize: size=='lg' ? '1.25rem' : '1rem'}}>
+                                            <FontAwesomeIcon icon={faPlay}/>
+                                        </motion.div>
+                                    </AnimatePresence>
                                 </Button>
                             </Tooltip>
                         </div>
