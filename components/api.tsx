@@ -6,6 +6,7 @@ import {
     SteamGroupStats,
     SteamInfo,
     SteamPlayer,
+    UserPrivilegeInfo,
     TopPlayer,
     PlayerInfo,
     Player,
@@ -66,7 +67,7 @@ export const getSteam = async (steam_id : string) =>
     await myFetch<SteamInfo>(`v1/get_steam/${steam_id}`);
 
 export const getAdmins = async () => 
-    [];//await myFetch<string[]>('v1/admins_players');
+    await myFetch<UserPrivilegeInfo[]>('info/team');
 
 export const getAllTimeScore = async (steam_id : string) => 
     [];//await myFetch<AllTimeScore[]>(`v1/alltimescore/${steam_id}`);
@@ -81,51 +82,21 @@ export const getTwitchStreams = async () =>
     [];//await myFetch<TwitchStream[]>('v1/streams/left4dead2');
 
 export const getDonatePlayers = async () => 
-    [];//await myFetch<DonatePlayer[]>('v1/donate_players');
+    await myFetch<UserPrivilegeInfo[]>('info/donaters');
 
 export const searchPlayer = async (search : string) => 
     [];//await myFetch<SteamPlayer[]>(`v1/nickname/${search}`);
 
 
-export const PrivilegeToString = (p : Privileges) => {
+export const PrivilegeToString = (p : number) => {
     switch(p)
     {
-        case 'o': return "VIP";
-        case 'p': return "Premium";
-        case 'q': return "Legend";
-        case 's': return "Legacy";
+        case 6: return "VIP";
+        case 7: return "Premium";
+        case 8: return "Legend";
+        case 3: return "Moderator";
+        case 2: return "Admin";
+        case 1: return "Owner";
         default: return "Player";
-    }
-}
-export const PrivilegeToBackground = (p : Privileges) => {
-    switch(p)
-    {
-        case 'o': return "bg-green-600";
-        case 'p': return "bg-red-500";
-        case 'q': return "bg-fuchsia-700";
-        case 's': return "bg-amber-500";
-        default: return "bg-neutral-700";
-    }
-}
-
-export const PrivilegeToBorder = (p : Privileges) => {
-    switch(p)
-    {
-        case 'o': return "border-green-600";
-        case 'p': return "border-red-500";
-        case 'q': return "border-fuchsia-700";
-        case 's': return "border-amber-500";
-        default: return "border-neutral-700";
-    }
-}
-
-export const PrivilegeToTextColor = (p : Privileges) => {
-    switch(p)
-    {
-        case 'o': return "text-green-600";
-        case 'p': return "text-red-500";
-        case 'q': return "text-fuchsia-700";
-        case 's': return "text-amber-500";
-        default: return "text-neutral-700";
     }
 }

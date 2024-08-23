@@ -1,15 +1,15 @@
 export const GlobalConfig = {
-    hostname: "l4d2perks.ru",
-    sitename: "Guardians",
-    boosty: "https://boosty.to/guardiansperkmod",
+    hostname: "vortexl4d4.ru",
+    sitename: "Vortex | Left 4 Dead 2",
+    boosty: "https://boosty.to/vortexl4d2",
     tg: undefined, //"https://t.me/EnduranceSupport_bot"
-    steam: "https://steamcommunity.com/groups/guardiansperkmod",
+    steam: "https://steamcommunity.com/groups/vortexl4d4",
     discord: "https://discord.gg/RNVGsk6AFe",
     vk: undefined, //"https://vk.com/endurancel4d2"
-    bans: "https://ban.l4d2perks.ru/",
-    wiki: "https://wiki.l4d2perks.ru/ru/home",
-    api: "https://l4d2perks.ru/api",
-    api2: "https://api2.l4d2perks.ru"
+    bans: "https://vortexl4d4.ru/",
+    wiki: "https://vortex-l4d2.fandom.com/ru/wiki/Vortex_Left_4_Dead_2",
+    api: "http://myserver:3005",
+    api2: "http://myserver:3005"
 }
 
 export const DependsOn = (variable, element ) =>{

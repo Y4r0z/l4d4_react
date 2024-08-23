@@ -1,4 +1,5 @@
 'use client'
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from "next/image";
 import {getServerById } from "../api";
 import { Server, Player } from "../types";

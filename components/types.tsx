@@ -1,4 +1,6 @@
-export type Privileges = 'o' | 'p' | 'q' | 's' | '' | null
+export type Privileges = 
+    'owner' | 'admin' | 'moderator' | 'vip' | 'premium' | 'legend' 
+    | 'soundpad' | 'custom_prefix' | 'welcome_phrase' | 'media_player';
 
 export type SteamGroupStats = {
     membersCount : string,
@@ -93,4 +95,17 @@ export type DonatePlayer = {
     STEAM_ID : string,
     FLAGS: Privileges,
     UnixTime_Until : number
+}
+
+export type PrivilegeType = {
+    id: number,
+    accessLevel: number,
+    name: Privileges,
+    description: string | null,
+}
+
+export type UserPrivilegeInfo = {
+    steamId : string,
+    privilege: PrivilegeType,
+    steamInfo: SteamInfo
 }

@@ -14,7 +14,7 @@ export default function PlayersTop(
         players,
         loadCount = 16,
         showPoints = true,
-        showTime = true,
+        showTime = false,
         pagination = true,
         textProps = "text-xl",
         className = "max-h-[92vh] md:max-h-[85vh]"

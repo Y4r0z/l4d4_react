@@ -1,11 +1,11 @@
 'use server'
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import { getOnlineDay, getServerById, getServers, getTopPlayers, getTwitchStreams} from "@/components/api"
 import ServersList from "@/components/ServersList/ServersList";
 import ImageCarousel from "@/components/HomePage/ImageCarousel/ImageCarousel";
 import DayStats from "@/components/HomePage/DayStats/DayStats";
 import PlayersTop from "@/components/PlayersTop/PlayersTop";
 import TwitchStreams from "@/components/HomePage/TwitchStreams/TwitchStreams";
-
 import { cookies } from "next/headers";
 
 export default async function Home() {
