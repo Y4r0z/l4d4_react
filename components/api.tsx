@@ -100,3 +100,42 @@ export const PrivilegeToString = (p : number) => {
         default: return "Player";
     }
 }
+
+export const PrivilegeToBackground = (p : number) => {
+    switch(p)
+    {
+        case 6: return "bg-green-600";
+        case 7: return "bg-red-500";
+        case 8: return "bg-fuchsia-700";
+        case 3: return "bg-amber-500";
+        case 2: return "bg-blue-600";
+        case 1: return "bg-indigo-600";
+        default: return "bg-neutral-700";
+    }
+}
+
+export const PrivilegeToBorder = (p : number) => {
+    switch(p)
+    {
+        case 6: return "border-green-600";
+        case 7: return "border-red-500";
+        case 8: return "border-fuchsia-700";
+        case 3: return "border-amber-500";
+        case 2: return "border-blue-600";
+        case 1: return "border-indigo-600";
+        default: return "border-neutral-700";
+    }
+}
+
+export const PrivilegeToTextColor = (p : number) => {
+    switch(p)
+    {
+        case 6: return "text-green-600";
+        case 7: return "text-red-500";
+        case 8: return "text-fuchsia-700";
+        case 3: return "text-amber-500";
+        case 2: return "text-blue-600";
+        case 1: return "text-indigo-600";
+        default: return "text-neutral-700";
+    }
+}
