@@ -11,4 +11,4 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - "3000:3054"
+      - "3030:3000"
