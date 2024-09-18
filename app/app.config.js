@@ -6,7 +6,7 @@ export const GlobalConfig = {
     steam: "https://steamcommunity.com/groups/vortexl4d4",
     discord: "https://discord.gg/RNVGsk6AFe",
     vk: undefined, //"https://vk.com/endurancel4d2"
-    bans: "https://vortexl4d4.ru/",
+    bans: "https://bans.vortexl4d4.ru/",
     wiki: "https://vortex-l4d2.fandom.com/ru/wiki/Vortex_Left_4_Dead_2",
     api: "https://api.vortexl4d4.ru",
     api2: "https://api.vortexl4d4.ru"

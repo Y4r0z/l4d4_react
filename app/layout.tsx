@@ -25,9 +25,9 @@ const lazer = localFont(
 
 export const metadata: Metadata = {
   title: GlobalConfig.sitename,
-  description: "Сервера L4D2",
+  description: "Vortex Left4Dead2",
   icons: {
-    icon: './logo2.ico'
+    icon: './VortexLogo256.png'
   }
 };
 
