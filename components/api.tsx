@@ -19,7 +19,6 @@ import {
 
 
 const apiBase = GlobalConfig.api;
-const apiBase2 = GlobalConfig.api2;
 
 export async function myFetch<Type>(href : string, settings : any = {})
 {
