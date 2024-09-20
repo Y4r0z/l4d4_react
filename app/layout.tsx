@@ -21,6 +21,12 @@ const lazer = localFont(
     variable: '--font-lazer'
   }
 )
+const verdana = localFont({
+  src: "./static-fonts/Verdana.ttf",
+  variable: '--font-verdana',
+  display: 'swap'
+});
+
 
 
 export const metadata: Metadata = {
@@ -38,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body className={`${inter.variable} ${futurot.variable} ${lazer.variable}`}>
+      <body className={`${inter.variable} ${futurot.variable} ${lazer.variable} ${verdana.variable}`}>
         <Providers>
           <div className="dark bg-obackground min-h-screen text-otext font-inter">
             <Header/>
