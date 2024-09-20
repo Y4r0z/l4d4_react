@@ -31,6 +31,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .word-spacing-3x {
+    word-spacing: 1.5rem;
+  }
 }
 
 @layer base {

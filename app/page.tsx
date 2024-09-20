@@ -49,7 +49,7 @@ export default async function Home() {
         (streams != undefined && streams?.length > 0) ? 
         <div className="bg-background-100 rounded-xl p-4">
           <h1 className="text-3xl mt-2 mb-4">Трансляции</h1>
-          {/* <div><TwitchStreams streams={streams}/></div> */}
+          { <div><TwitchStreams streams={streams}/></div> }
         </div>
         :
         <></>

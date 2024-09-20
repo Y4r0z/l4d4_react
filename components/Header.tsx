@@ -56,8 +56,9 @@ export default function Header()
             isBordered={true}
         >
             <NavbarBrand>
-                <Link href="/" className="font-extrabold text-accent-500 text-xl md:text-2xl lg:text-3xl">
-                    {(GlobalConfig.sitename as string).toUpperCase()}
+                <Link href="/" className="text-accent-500 text-xl md:text-2xl lg:text-3xl word-spacing-3x">
+                    <span className="font-extrabold">VORTEX </span>
+                    <span className="font-futurot">LEFT4DEAD2</span>
                 </Link>
             </NavbarBrand>
 

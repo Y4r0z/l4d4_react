@@ -1,6 +1,6 @@
 export const GlobalConfig = {
     hostname: "vortexl4d4.ru",
-    sitename: "Vortex | Left 4 Dead 2",
+    sitename: "Vortex Left4Dead2",
     boosty: "https://boosty.to/vortexl4d2",
     tg: undefined, //"https://t.me/EnduranceSupport_bot"
     steam: "https://steamcommunity.com/groups/vortexl4d4",
