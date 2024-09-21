@@ -1,6 +1,15 @@
 import React from 'react';
 
-const PerkCategory = ({ title, perks }) => (
+interface Perk {
+  name: string;
+  description: string;
+}
+
+interface PerksData {
+  [category: string]: Perk[];
+}
+
+const PerkCategory: React.FC<{ title: string; perks: Perk[] }> = ({ title, perks }) => (
   <div className="mb-8">
     <h2 className="text-2xl font-semibold mb-4 text-red-500">{title}</h2>
     <ul className="space-y-3">
@@ -14,8 +23,8 @@ const PerkCategory = ({ title, perks }) => (
   </div>
 );
 
-const InfectedPerks = () => {
-  const perksData = {
+const InfectedPerks: React.FC = () => {
+  const perksData: PerksData = {
     "Толстяк": [
       { name: "Атлетичный", description: "Атлетичное прошлое толстяка даёт ему возможность бегать во время заблёва, а также перемещаться на 25% быстрее!" },
       { name: "Гнев толпы", description: "Урон орды Толстяка увеличивается на 50%, удары Толстяка отталкивают жертву!" },

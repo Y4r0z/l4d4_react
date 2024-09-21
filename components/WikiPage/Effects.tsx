@@ -1,6 +1,13 @@
 import React from 'react';
 
-const EffectCategory = ({ title, effects, bgColor, borderColor }) => (
+interface EffectCategoryProps {
+  title: string;
+  effects: { name: string; description: string }[];
+  bgColor: string;
+  borderColor: string;
+}
+
+const EffectCategory: React.FC<EffectCategoryProps> = ({ title, effects, bgColor, borderColor }) => (
   <div className="mb-8">
     <h2 className={`text-2xl font-semibold mb-4 ${borderColor} pb-2 border-b-2`}>{title}</h2>
     <ul className="space-y-3">

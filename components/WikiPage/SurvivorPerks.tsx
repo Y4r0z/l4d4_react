@@ -1,6 +1,11 @@
 import React from 'react';
 
-const PerkCategory = ({ title, perks }) => (
+interface PerkCategoryProps {
+  title: string;
+  perks: { name: string; description: string }[];
+}
+
+const PerkCategory: React.FC<PerkCategoryProps> = ({ title, perks }) => (
   <div className="mb-8">
     <h2 className="text-2xl font-semibold mb-4 text-red-500">{title}</h2>
     <ul className="space-y-3">

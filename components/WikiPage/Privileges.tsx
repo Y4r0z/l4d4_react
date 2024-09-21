@@ -1,6 +1,13 @@
 import React from 'react';
 
-const PrivilegeRow = ({ benefit, vip, premium, legend }) => (
+interface PrivilegeRowProps {
+  benefit: string;
+  vip: boolean | string;
+  premium: boolean | string;
+  legend: boolean | string;
+}
+
+const PrivilegeRow: React.FC<PrivilegeRowProps> = ({ benefit, vip, premium, legend }) => (
   <tr className="border-b border-stone-700">
     <td className="py-3 px-4">{benefit}</td>
     <td className="py-3 px-4 text-center">{vip}</td>

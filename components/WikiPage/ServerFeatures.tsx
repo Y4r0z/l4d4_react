@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const FeatureSection = ({ title, children }) => (
+interface FeatureSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+interface ExpandableFeatureProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const FeatureSection: React.FC<FeatureSectionProps> = ({ title, children }) => (
   <div className="mb-12">
     <h2 className="text-2xl font-semibold mb-6 text-accent-500 border-b-2 border-accent-500 pb-2">{title}</h2>
     {children}
   </div>
 );
 
-const ExpandableFeature = ({ title, children }) => {
+const ExpandableFeature: React.FC<ExpandableFeatureProps> = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -73,8 +83,8 @@ const ServerFeatures: React.FC = () => {
           <p className="mb-4">Уникальная механика, позволяющая поддерживать игровой ритм, даже если в живых остался только один выживший. Это дает шанс на эпическое возвращение и держит в напряжении до последней секунды.</p>
           <ul className="list-disc list-inside space-y-2">
             <li>Последнего выжившего нельзя схватить. Если он был схвачен до этого, то вырвется из захвата.</li>
-            <li>"Хватающие" способности зараженных отключаются (Охотник, Жокей, Громила, Курильщик).</li>
-            <li>Способности зараженных без "хватающей" особенности остаются активными (Толстяк, Плевальщица, Танк).</li>
+            <li>Хватающие способности зараженных отключаются (Охотник, Жокей, Громила, Курильщик).</li>
+            <li>Способности зараженных без хватающей особенности остаются активными (Толстяк, Плевальщица, Танк).</li>
             <li>Активируется механика Endgame.</li>
             <li>100 бонусных очков за успешное прохождение карты последним выжившим.</li>
           </ul>
@@ -108,10 +118,10 @@ const ServerFeatures: React.FC = () => {
             <li>Плейлист меняется каждый месяц, обеспечивая свежесть звучания.</li>
             <li>Стоимость включения трека: 1000 токенов (500 для PREMIUM, 100 для LEGEND).</li>
             <li>Перезарядка проигрывателя: 30 секунд.</li>
-            <li>Игроки с привилегиями "Legend" или "Moderator" могут добавлять свои песни.</li>
+            <li>Игроки с привилегиями Legend или Moderator могут добавлять свои песни.</li>
           </ul>
           <p className="mt-4 text-yellow-600">Если нет музыки:</p>
-          <p>Проверьте команды cl_downloadfilter и cl_allowdownload в консоли. Установите значения "all" и "1" соответственно, затем перезапустите игру.</p>
+          <p>Проверьте команды cl_downloadfilter и cl_allowdownload в консоли. Установите значения all и 1 соответственно, затем перезапустите игру.</p>
         </ExpandableFeature>
 
         <ExpandableFeature title="Дверь убежища">

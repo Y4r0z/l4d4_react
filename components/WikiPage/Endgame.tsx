@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Section = ({ title, content }) => (
+interface SectionProps {
+  title: string;
+  content: React.ReactNode;
+}
+
+const Section: React.FC<SectionProps> = ({ title, content }) => (
   <div className="mb-8">
     <h2 className="text-2xl font-semibold mb-4 text-red-500">{title}</h2>
     <div className="space-y-3 text-stone-300">{content}</div>
@@ -59,7 +64,7 @@ const Endgame = () => {
           content={
             <ul className="list-disc list-inside space-y-2">
               <li>Когда остаётся один выживший, его больше нельзя схватить.</li>
-              <li>Все "хватающие" способности заражённых отключены.</li>
+              <li>Все хватающие способности заражённых отключены.</li>
               <li>Если последний выживший успешно проходит карту, его команда получает 150 бонусных очков.</li>
             </ul>
           }
