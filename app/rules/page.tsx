@@ -1,5 +1,7 @@
 'use client'
 
+import './styles.css'
+
 import { Rules } from "@/components/tools/rules";
 import {GlobalConfig, DependsOn} from "../app.config.js"
 

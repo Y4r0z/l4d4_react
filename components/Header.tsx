@@ -43,7 +43,7 @@ export default function Header()
     const dropdownItems = [
         {text: 'Команда', href: '/team'},
         {text: 'Правила', href: '/rules'},
-        {text: 'Вики проекта', href: GlobalConfig.wiki}
+        {text: 'Wiki-v1.2', href: '/wiki'}
     ]
     const allItems = menuItems.concat(dropdownItems);
 
