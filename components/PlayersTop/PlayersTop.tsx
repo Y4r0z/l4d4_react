@@ -8,7 +8,6 @@ import { useAsyncList } from "react-stately";
 import { useInfiniteScroll } from "@nextui-org/use-infinite-scroll";
 import './styles.css'
 
-
 export default function PlayersTop(
     {
         players,
@@ -59,8 +58,6 @@ export default function PlayersTop(
             onLoadMore: list.loadMore,
         }
     );
-    
-
 
     const secToDate = (seconds : number) =>{
         const hours = Math.floor(seconds / 3600);
@@ -79,21 +76,27 @@ export default function PlayersTop(
         if (showTime) cols.push(<TableColumn key={3} className={textProps}>Время</TableColumn>);
         return cols;
     }
+
+    const openSteamProfile = (steamId: string) => {
+        window.open(`https://steamcommunity.com/profiles/${steamId}`, '_blank');
+    };
+
     const getRowCells = (p : TopPlayer) => {
         const cells = [
-            <TableCell key={1} className="flex flex-row items-center gap-4 max-w-[10rem] md:max-w-[14rem]">
+            <TableCell key={1} className="flex flex-row items-center gap-4">
                 <Badge color="success" content=" " isInvisible={!isPlayerOnline(p)} placement="bottom-right" size="sm">
                     <Avatar src={p.steamInfo.avatarmedium} name={p.steamInfo.personaname} isBordered/>
                 </Badge>
-                <div className={textProps}>{p.steamInfo.personaname}</div>
+                <div className={`${textProps} truncate max-w-[120px] md:max-w-[200px] cursor-pointer`} title={p.steamInfo.personaname}>
+                    {p.steamInfo.personaname}
+                </div>
             </TableCell>
         ]
-        if(showPoints) cells.push(<TableCell key={2} className={textProps + (showTime ? "" : " text-right")}>{p.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>);
+        if(showPoints) cells.push(<TableCell key={2} className={`${textProps} text-right`}>{p.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>);
         if(showTime) cells.push(<TableCell key={3} className={textProps}>{secToDate(p.GameTime)}</TableCell>);                       
         return cells;
     }
-    //Record<"base" ｜ "table" ｜ "thead" ｜ "tbody" ｜ "tfoot" ｜ "emptyWrapper" 
-    //｜ "loadingWrapper" ｜ "wrapper" ｜ "tr" ｜ "th" ｜ "td" ｜ "sortIcon", string>
+
     return(
         <Table
             isHeaderSticky
@@ -108,7 +111,9 @@ export default function PlayersTop(
                 ) : null
             }
             classNames={{
-                'wrapper': 'my-table overflow-x-hidden p-4'
+                'wrapper': 'my-table overflow-x-hidden p-4',
+                'td': 'whitespace-nowrap',
+                'tr': 'cursor-pointer transition-colors hover:bg-gray-700'
             }}
         >
             <TableHeader>
@@ -121,7 +126,11 @@ export default function PlayersTop(
             >
             {
                 (p) => (
-                    <TableRow key={p.steamId} className="hover:bg-gray-800">
+                    <TableRow 
+                        key={p.steamId} 
+                        className="hover:bg-gray-800"
+                        onClick={() => openSteamProfile(p.steamId)}
+                    >
                         {getRowCells(p)}
                     </TableRow>
                 )
