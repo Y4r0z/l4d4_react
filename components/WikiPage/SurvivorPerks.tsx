@@ -7,11 +7,11 @@ interface PerkCategoryProps {
 
 const PerkCategory: React.FC<PerkCategoryProps> = ({ title, perks }) => (
   <div className="mb-8">
-    <h2 className="text-2xl font-semibold mb-4 text-red-500">{title}</h2>
+    <h2 className="text-2xl font-semibold mb-4 text-blue-500">{title}</h2>
     <ul className="space-y-3">
       {perks.map((perk, index) => (
-        <li key={index} className="bg-stone-800 rounded-x1 p-4 shadow-md">
-          <h3 className="text-lg font-medium text-red-400 mb-2">{perk.name}</h3>
+        <li key={index} className="bg-stone-800 rounded-xl p-4 shadow-md">
+          <h3 className="text-lg font-medium text-blue-400 mb-2">{perk.name}</h3>
           <p className="text-stone-300">{perk.description}</p>
         </li>
       ))}
@@ -59,7 +59,7 @@ const SurvivorPerks = () => {
   return (
     <div className="px-8 md:px-16 lg:px-32 py-4 my-4 mx-0 md:mx-16 lg:mx-24 xl:mx-36 2xl:mx-48 bg-background-100 rounded-xl">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-red-500">Перки для выживших</h1>
+        <h1 className="text-4xl font-bold mb-6 text-blue-500">Перки для выживших</h1>
         
         <p className="mb-8 text-lg leading-relaxed">
           Перечень используемых перков при игре за выживших. В отличие от перков для заражённых такое, что они не привязаны к определённым выжившим и могут быть выбраны на любом персонаже.

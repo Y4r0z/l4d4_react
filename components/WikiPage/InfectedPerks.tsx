@@ -14,7 +14,7 @@ const PerkCategory: React.FC<{ title: string; perks: Perk[] }> = ({ title, perks
     <h2 className="text-2xl font-semibold mb-4 text-red-500">{title}</h2>
     <ul className="space-y-3">
       {perks.map((perk, index) => (
-        <li key={index} className="bg-stone-800 rounded-x1 p-4 shadow-md">
+        <li key={index} className="bg-stone-800 rounded-xl p-4 shadow-md">
           <h3 className="text-lg font-medium text-red-400 mb-2">{perk.name}</h3>
           <p className="text-stone-300">{perk.description}</p>
         </li>

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import AboutServer from '@/components/WikiPage/AboutServer';
 import SurvivorPerks from '@/components/WikiPage/SurvivorPerks';
 import InfectedPerks from '@/components/WikiPage/InfectedPerks';
 import Effects from '@/components/WikiPage/Effects';
@@ -10,13 +11,14 @@ import ServerFeatures from '@/components/WikiPage/ServerFeatures';
 import Commands from '@/components/WikiPage/Commands';
 
 const wikiCategories = [
+  { title: 'О сервере', component: 'about-server' },
   { title: 'Перки выживших', component: 'survivor-perks' },
   { title: 'Перки заражённых', component: 'infected-perks' },
   { title: 'Эффекты от перков', component: 'effects' },
   { title: 'Команды чата', component: 'commands' },
-  { title: 'Коины и Магазин', component: 'coins' },
-  { title: 'Привилегии Boosty', component: 'privileges' },
-  { title: 'Особенности сервера', component: 'server-features' }
+  /* { title: 'Коины и Магазин', component: 'coins' }, */
+  { title: 'Привилегии', component: 'privileges' },
+  { title: 'Особые механики', component: 'server-features' }
 ];
 
 const WikiMain: React.FC = () => {
@@ -24,6 +26,10 @@ const WikiMain: React.FC = () => {
 
   const renderComponent = () => {
     switch (activeComponent) {
+      default:
+        return <AboutServer />;
+      case 'about-server':
+        return <AboutServer />;
       case 'survivor-perks':
         return <SurvivorPerks />;
       case 'infected-perks':
@@ -38,8 +44,6 @@ const WikiMain: React.FC = () => {
         return <ServerFeatures />;
       case 'commands':
         return <Commands />;
-      default:
-        return <p className="text-center text-xl">Выберите категорию, чтобы увидеть информацию.</p>;
     }
   };
 
@@ -47,7 +51,7 @@ const WikiMain: React.FC = () => {
     <main className="flex flex-col py-4 md:py-12 px-0 md:px-4 lg:px-8 xl:px-16 gap-8">
       <div className="bg-background-100 rounded-xl p-4">
         <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-accent-500 border-b-2 border-accent-500 pb-2 text-center">
-          Wiki проекта Vortex
+          Vortex Wiki
         </h1>
        
         <nav className="mb-8">
