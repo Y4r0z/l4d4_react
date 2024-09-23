@@ -53,7 +53,7 @@ const Effects: React.FC = () => {
         <h1 className="text-4xl font-bold mb-6 text-accent-500 border-b-2 border-accent-500 pb-2">Эффекты от перков</h1>
        
         <p className="mb-8 text-lg leading-relaxed text-primary-900">
-          Перки могут накладывать как положительные, так и отрицательные эффекты. Ниже представлен список возможных эффектов:
+          Перки могут накладывать как положительные, так и отрицательные эффекты. <br/>Ниже представлен список возможных эффектов:
         </p>
 
         <EffectCategory
