@@ -114,6 +114,14 @@ export default function ServerCard(
         return <tr key={player.name}><td>{player.name}</td><td>{ftime.join('')}</td></tr>
     }
 
+    const sortPlayers = (players: Player[]) => {
+        return players.sort((a, b) => {
+            const timeA = a.time !== undefined ? a.time : -1;
+            const timeB = b.time !== undefined ? b.time : -1;
+            return timeB - timeA;
+        });
+    }
+
     const progressSize = size == "lg" ? "md" : "sm";
     const btnSize = size == "lg" ? "lg" : "sm";
     const tableStyle = size == "lg" ? "text-lg w-[100%]" : "text-sm w-[100%]"
@@ -216,7 +224,7 @@ export default function ServerCard(
                 <motion.div ref={scope} className="hidden">
                     <table className={tableStyle}>
                         <tbody>
-                        {server?.players.map((p) =>{
+                        {server?.players && sortPlayers(server.players).map((p) =>{
                             return buildPlayer(p)
                         })}
                         </tbody>
