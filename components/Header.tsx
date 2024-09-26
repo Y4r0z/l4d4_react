@@ -38,12 +38,12 @@ export default function Header()
         {text: 'Убежище', href: '/'},
         {text: 'Рейтинг', href: '/top'},
         {text: 'Баны', href: GlobalConfig.bans},
-        {text: 'Поддержка', href: '/donate'}
+        {text: 'Поддержка', href: '/donate'},
+        {text: 'Wiki', href: '/wiki'}
       ];
     const dropdownItems = [
         {text: 'Команда', href: '/team'},
-        {text: 'Правила', href: '/rules'},
-        {text: 'Wiki-v1.2', href: '/wiki'}
+        {text: 'Правила', href: '/rules'}
     ]
     const allItems = menuItems.concat(dropdownItems);
 
