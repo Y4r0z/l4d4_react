@@ -38,10 +38,11 @@ export default function Header()
         {text: 'Убежище', href: '/'},
         {text: 'Рейтинг', href: '/top'},
         {text: 'Баны', href: GlobalConfig.bans},
-        {text: 'Поддержка', href: '/donate'},
+        {text: 'Discord', href: '/discord'},
         {text: 'Wiki', href: '/wiki'}
       ];
     const dropdownItems = [
+        {text:'Поддержка',href:'/donate'},
         {text: 'Команда', href: '/team'},
         {text: 'Правила', href: '/rules'}
     ]
