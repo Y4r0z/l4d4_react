@@ -25,13 +25,13 @@ const UnlockerInstructions: React.FC = () => (
     </p>
     <ol className="list-decimal list-inside text-stone-300 space-y-2">
       <li>Скачайте архив <a href="https://fastdl.vortexl4d4.ru/disunlock/DiscordUnlocker.7z" className="text-accent-500 hover:underline">Discord Unlocker</a>.</li>
-      <li>Распакуйте архив в корень диска C: (путь не должен содержать пробелов).</li>
+      <li>Распакуйте архив в корень диска C:\ (путь не должен содержать пробелов).</li>
       <li>Откройте папку C:\DiscordUnlocker.</li>
-      <li>Запустите "Разблокировать Discord.cmd" от имени администратора.</li>
-      <li>Если появится предупреждение безопасности, нажмите "Подробнее" → "Выполнить в любом случае".</li>
+      <li>Запустите &quot;Разблокировать Discord.cmd&quot; от имени администратора.</li>
+      <li>Если появится предупреждение безопасности, нажмите &quot;Подробнее&quot; → &quot;Выполнить в любом случае&quot;.</li>
     </ol>
     <p className="text-stone-300 mt-4">
-      Для удаления: запустите StopUnlocker.cmd от имени администратора и удалите папку C:\DiscordUnlocker
+      Для удаления: запустите StopUnlocker.cmd от имени администратора и удалите папку C:\DiscordUnlocker.
     </p>
   </div>
 );
