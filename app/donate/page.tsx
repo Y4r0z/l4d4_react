@@ -1,7 +1,7 @@
 'use server'
 
 import { PrivilegeToString, getDonatePlayers, getSteam } from "@/components/api"
-import Image from "next/image";
+import Image from "next/image.js";
 import {GlobalConfig, DependsOn} from "../app.config.js"
 
 

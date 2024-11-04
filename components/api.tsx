@@ -54,7 +54,7 @@ export const getSteamGroupStats = async () =>
     await myFetch<SteamGroupStats>(`info/group`);
 
 export const getTopPlayers = async (start : number | string, limit : number | string) => 
-    await myFetch<TopPlayer[]>(`score/top?offset=${start}&limit=${limit}`, {next:{revalidate: 3600}});
+    await myFetch<TopPlayer[]>(`score/top?offset=${start}&limit=${limit}`, {next:{revalidate: 1800}});
 
 export const getOnlinePlayers = async () => 
     [];//await myFetch<TopPlayer[]>('v1/online_players');
@@ -81,7 +81,7 @@ export const getTwitchStreams = async () =>
     [];//await myFetch<TwitchStream[]>('v1/streams/left4dead2');
 
 export const getDonatePlayers = async () => 
-    await myFetch<UserPrivilegeInfo[]>('info/donaters');
+    await myFetch<UserPrivilegeInfo[]>('info/donaters', {next:{revalidate: 1800}});
 
 export const searchPlayer = async (search : string) => 
     [];//await myFetch<SteamPlayer[]>(`v1/nickname/${search}`);
